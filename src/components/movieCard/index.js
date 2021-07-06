@@ -14,6 +14,7 @@ import CalendarIcon from "@material-ui/icons/CalendarTodayTwoTone";
 import StarRateIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import img from '../../images/film-poster-placeholder.png';
 import { MoviesContext } from "../../contexts/moviesContext";
 
@@ -21,7 +22,9 @@ const useStyles = makeStyles({
   card: { maxWidth: 345 },
   media: { height: 500 },
   avatar: {
-    backgroundColor: "rgb(255, 0, 0)",
+    backgroundColor: "rgb(255, 0, 0)"},
+  StarIcon: {
+    backgroundColor: "rgb(0, 0, 255)"
   },
 });
 
@@ -33,28 +36,40 @@ export default function MovieCard({ movie, action }) {
     movie.favorite = true;
   } else {
     movie.favorite = false
-  }
+  };
 
   if (mustWatch.find((id) => id === movie.id)) {
     movie.mustWatch = true;
   } else {
     movie.mustWatch = false;
-  }
+  };
 
   return (
     <Card className={classes.card}>
       <CardHeader
         className={classes.header}
         avatar={
-          movie.favorite ? (
+          //both ? (
+          (movie.favorite && movie.mustWatch) ? (         // Allowing both the favorite and must watch icon
+            <AvatarGroup max={2}>                         // Using AvatarGroup to handle multiple
+              <Avatar className={classes.avatar}>
+                <FavoriteIcon />
+              </Avatar>
+              <Avatar className={classes.StarIcon}>
+                  <StarIcon />
+              </Avatar>
+            </AvatarGroup>
+          ) : (
+          movie.favorite ? (                             // Only favorite icon
             <Avatar className={classes.avatar}>
-            <FavoriteIcon />
+              <FavoriteIcon />
             </Avatar>
-          ) : (movie.mustWatch ? (
-            <Avatar className={classes.avatar}>
-            <StarIcon />
-            </Avatar>
-          ) : null)
+          ) : (movie.mustWatch ? (                       // Only must watch icon
+                <Avatar className={classes.StarIcon}>
+                  <StarIcon />
+                </Avatar>
+              ) : null)
+          )
         }
         title={
           <Typography variant="h5" component="p">

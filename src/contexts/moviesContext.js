@@ -7,9 +7,11 @@ const MoviesContextProvider = (props) => {
   const [favorites, setFavorites] = useState( [] );
   const [mustWatch, setMustWatch] = useState( [] );
 
-  // Function to add movie to the favorites state variable array
+  // Function to add movie to the favorites state variable array. Only allow to be added once
   const addToFavorites = (movie) => {
-    setFavorites([...favorites,movie.id])
+    if (!(favorites.includes(movie.id))) {
+      setFavorites([...favorites,movie.id])
+    }
   };
 
   // We will use this function in a later section
