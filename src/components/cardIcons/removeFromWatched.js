@@ -8,7 +8,7 @@ const RemoveFromWatchedIcon = ({ movie }) => {
 
   const handleRemoveFromWatched = (e) => {
     e.preventDefault();
-    context.handleRemoveFromWatched(movie);
+    context.removeFromMustWatch(movie);
   };
   return (
     <IconButton
