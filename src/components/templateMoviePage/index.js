@@ -15,9 +15,15 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
   },
   gridList: {
-    width: 450,
+    width: 500,
     height: '100vh',
   },
+  imageList: {
+    flexWrap: 'nowrap',
+    width: 700,
+    height: '100vh',
+  },
+  
 }));
 
 const TemplateMoviePage = ({ movie, children }) => {
@@ -59,6 +65,22 @@ const TemplateMoviePage = ({ movie, children }) => {
         <Grid item xs={9}>
           {children}
         </Grid>
+
+        <Grid item xs={9}>
+          <div className={classes.root1}>
+            <GridList cellHeight={500} className={classes.imageList} rows={1}>
+              {images.map((image) => (
+                <GridListTile key={image.file_path} className={classes.gridListTile} rows={1}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
+                    alt={image.poster_path}
+                  />
+                </GridListTile>
+              ))}
+            </GridList>
+          </div>
+        </Grid>
+        
       </Grid>
     </>
   );
