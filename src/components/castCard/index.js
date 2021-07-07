@@ -19,8 +19,8 @@ import img from '../../images/film-poster-placeholder.png';
 import { MoviesContext } from "../../contexts/moviesContext";
 
 const useStyles = makeStyles({
-  card: { maxWidth: 345 },
-  media: { height: 500 },
+  card: { maxWidth: 300 },
+  media: { height: 400 },
 });
 
 export default function CastCard({ cast, action }) {

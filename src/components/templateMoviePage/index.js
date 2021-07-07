@@ -6,7 +6,10 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import { getMovieImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
+import Spinner from "../spinner";
+import SampleCast from "../../stories/sampleCastData";
+import AddToFavoritesIcon from "../../components/cardIcons/addToFavorites";
+import CastList from "../../components/castList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +45,7 @@ const TemplateMoviePage = ({ movie, children }) => {
   }
   const images = data.posters 
 
+
   return (
     <>
       <MovieHeader movie={movie} />
@@ -66,21 +70,6 @@ const TemplateMoviePage = ({ movie, children }) => {
           {children}
         </Grid>
 
-        <Grid item xs={9}>
-          <div className={classes.root1}>
-            <GridList cellHeight={500} className={classes.imageList} rows={1}>
-              {images.map((image) => (
-                <GridListTile key={image.file_path} className={classes.gridListTile} rows={1}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                    alt={image.poster_path}
-                  />
-                </GridListTile>
-              ))}
-            </GridList>
-          </div>
-        </Grid>
-        
       </Grid>
     </>
   );
