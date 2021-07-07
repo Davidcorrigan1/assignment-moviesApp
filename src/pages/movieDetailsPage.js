@@ -2,38 +2,34 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
-//import useMovie from "../hooks/useMovie";
-import { getMovie } from '../api/tmdb-api'
+import { getMovie, getMovieCast } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
-import SampleCast from "../stories/sampleCastData";
 import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
 import CastList from "../components/castList";
 
 const MovieDetailsPage = (props) => {
   const { id } = props.match.params
 
-  const { data: movie, error, isLoading, isError } = useQuery(
+  const { data: movie, error: movieError, isLoading: movieIsLoading, isError: movieIsError } = useQuery(
     ["movie", { id: id }],
     getMovie
   );
 
-  if (isLoading) {
+  const { data: castList, error: castError, isLoading: castIsLoading, isError: castIsError } = useQuery(
+    ["moveid", {id: id}],
+    getMovieCast
+  );
+
+  if (movieIsLoading || castIsLoading) {
     return <Spinner />;
   }
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
+  if (movieIsError) {
+    return <h1>{movieError.message}</h1>;
+  } else if (castIsError) {
+    <h1>{castError.message}</h1>;
   }
-
-  const castMembers = [
-    { ...SampleCast, id: 1 },
-    { ...SampleCast, id: 2 },
-    { ...SampleCast, id: 3 },
-    { ...SampleCast, id: 4 },
-    { ...SampleCast, id: 5 },
-  ];
-
 
   return (
     <>
@@ -42,9 +38,9 @@ const MovieDetailsPage = (props) => {
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
             <CastList
-              castMembers={castMembers}
+              castMembers={castList.cast}
               action={(c) => <AddToFavoritesIcon movie={c} />}
-            />
+            /> 
           </PageTemplate>
         </>
       ) : (
