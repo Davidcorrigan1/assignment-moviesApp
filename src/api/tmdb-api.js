@@ -1,3 +1,4 @@
+  // returns as array of movies in json format
   export const getMovies = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -8,6 +9,7 @@
     return response.json();
   };
   
+  // Returns the movie details based on a movie id.
   export const getMovie = async ( args ) => {
     console.log(args)
     // eslint-disable-next-line no-unused-vars
@@ -21,6 +23,21 @@
     return response.json();
   };
 
+   // Returns the person details based on a person id.
+   export const getPerson = async ( args ) => {
+    console.log(args)
+    // eslint-disable-next-line no-unused-vars
+    const [prefix, { id }] = args.queryKey;
+    const response = await fetch(
+      `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    );
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  };
+
+  //returns the cast of a given movie based on movie id
   export const getMovieCast = async ( args ) => {
     // eslint-disable-next-line no-unused-vars
     const [prefix, { id }] = args.queryKey;
@@ -33,6 +50,7 @@
     return response.json();
   };
 
+  // returns the movies in which a person is involved, based on person id.
   export const getCastMovies = async ( args ) => {
     // eslint-disable-next-line no-unused-vars
     const [prefix, { id }] = args.queryKey;
@@ -46,7 +64,7 @@
     return response.json();
   };
 
-  
+  // returns an array of genres 
   export const getGenres = async () => {
     const response = await  fetch(
       "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
@@ -59,6 +77,7 @@
     return response.json();
   };
   
+  // returns an array of moview reviews based on movie id
   export const getMovieReviews = (id) => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
@@ -70,6 +89,7 @@
       });
   };
 
+  // returns an array of movie images based on movie id
   export const getMovieImages = async ({queryKey}) => {
     // eslint-disable-next-line no-unused-vars
     const [prefix, { id }] = queryKey;
@@ -82,6 +102,7 @@
     return response.json();
   };
 
+  // returns an array of upcoming movies.
   export const getUpcomingMovies = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`

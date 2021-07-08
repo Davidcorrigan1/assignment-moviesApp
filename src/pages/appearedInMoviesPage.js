@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
-import { getCastMovies } from "../api/tmdb-api";
+import { getCastMovies, getPerson } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
@@ -15,19 +15,27 @@ const AppearedInMoviesPage = (props) => {
     getCastMovies
   );
 
-  if (moviesIsLoading) {
+    // Find the Actors details
+    const { data: actor, error: actorError, isLoading: actorIsLoading, isError: actorIsError } = useQuery(
+      ["actor", { id: id }],
+      getPerson
+    );
+
+  if (moviesIsLoading || actorIsLoading) {
     return <Spinner />;
   }
 
   if (moviesIsError) {
     return <h1>{moviesError.message}</h1>
-  }  
+  }  else if (actorIsError) {
+    return<h1>actorError.message</h1>
+  };
 
   console.log(movies);
 
   return (
     <PageTemplate
-      title="Appeared in Movies"
+      title={actor.name + " Movies"}
       movies={movies.results}
       action={(movie) => {
         return <AddToFavoritesIcon movie={movie} />
