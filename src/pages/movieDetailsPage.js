@@ -16,6 +16,7 @@ const MovieDetailsPage = (props) => {
     getMovie
   );
 
+  // Getting the cast details using the useQuery hook which will manage the caching as well.
   const { data: castList, error: castError, isLoading: castIsLoading, isError: castIsError } = useQuery(
     ["moveid", {id: id}],
     getMovieCast
