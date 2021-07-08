@@ -33,6 +33,19 @@
     return response.json();
   };
 
+  export const getCastMovies = async ( args ) => {
+    // eslint-disable-next-line no-unused-vars
+    const [prefix, { id }] = args.queryKey;
+    const response = await fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&with_people=${id}`
+    );
+    if (!response.ok) {
+      console.log("hello Error");
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  };
+
   
   export const getGenres = async () => {
     const response = await  fetch(
