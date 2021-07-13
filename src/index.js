@@ -13,6 +13,9 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import AppearedInMoviesPage from "./pages/appearedInMoviesPage";
+import LoginPage from "./pages/loginPage";
+import AuthProvider from "./contexts/authContext";
+import PrivateRoute from "./components/privateRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,20 +32,23 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <SiteHeader />      {/* New Header  */}
-        <MoviesContextProvider>
-          {" "}
-          <Switch>
-            <Route exact path="/reviews/form" component={AddMovieReviewPage} />
-            <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
-            <Route path="/reviews/:id" component={MovieReviewPage} />
-            <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
-            <Route exact path="/movies/watched" component={WatchedMoviesPage} />
-            <Route path="/movies/:id" component={MoviePage} />
-            <Route path="/appearedInmovies/:id" component={AppearedInMoviesPage} />
-            <Route exact path="/" component={HomePage} />
-            <Redirect from="*" to="/" />
-          </Switch>
-        </MoviesContextProvider>
+        <AuthProvider>
+          <MoviesContextProvider>
+            {" "}
+            <Switch>
+              <Route exact path="/reviews/form" component={AddMovieReviewPage} />
+              <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
+              <Route path="/reviews/:id" component={MovieReviewPage} />
+              <PrivateRoute path="/movies/favorites" component={FavoriteMoviesPage} />
+              <Route exact path="/movies/watched" component={WatchedMoviesPage} />
+              <Route path="/movies/:id" component={MoviePage} />
+              <Route path="/appearedInmovies/:id" component={AppearedInMoviesPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route exact path="/" component={HomePage} />
+              <Redirect from="*" to="/" />
+            </Switch>
+          </MoviesContextProvider>
+        </AuthProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
