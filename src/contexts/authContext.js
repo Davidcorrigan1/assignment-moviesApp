@@ -1,19 +1,25 @@
 import React, { useState, createContext } from "react";
+import { auth, signInWithGoogle, generateUserDocument } from "../database/firebase";
 
 export const AuthContext = createContext(null);
 
 const AuthContextProvider = (props) => {
 
-  const [user, setUser] = useState({ username: null, email: null, password: null });
+  const [user, setUser] = useState({firstName: null, lastName: null, email: null, password: null });
 
-  const authenticate = (username, email, password) => {
-    setUser({ username, email, password });
+  const authenticate = (email, password) => {
+    setUser({email, password });
   };
 
   const isAuthenticated = user.email === null ? false : true
 
+  const signup = (firstName, lastName, email, password) => {
+    setUser({firstName: firstName, lastName: lastName, email: email, password: password});
+    
+  };
+
   const signout = () => {
-    setTimeout(() => setUser( { username: null, email: null, password: null } ), 100);
+    setTimeout(() => setUser( { firstName: null, lastName: null, email: null, password: null } ), 100);
   };
 
   return (
@@ -22,6 +28,7 @@ const AuthContextProvider = (props) => {
         isAuthenticated,
         authenticate,
         signout,
+        signup,
       }}
     >
       {props.children}

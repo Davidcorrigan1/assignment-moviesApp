@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,44 +11,65 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { auth, signInWithGoogle, generateUserDocument } from "../database/firebase";
 
+const SignUp = () => {
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [error, setError] = useState(null);
 
-/* const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
+  const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
     event.preventDefault();
     try{
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, {displayName});
+      generateUserDocument(user);
     }
     catch(error){
       setError('Error Signing up with email and password');
-    }
+    }  
 
     setEmail("");
     setPassword("");
-    setDisplayName("");
-  }; */
+    setFirstName("");
+    setLastName("");
+  };
 
-export default function SignUp() {
+  const onChangeHandler = event => {
+    const { name, value } = event.currentTarget;
+
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    } else if (name === "firstName") {
+      setFirstName(value);
+    } else if (name === "lastName") {
+      setLastName(value);
+    }
+  };
+
   const classes = useStyles();
 
   return (
@@ -66,12 +88,14 @@ export default function SignUp() {
               <TextField
                 autoComplete="fname"
                 name="firstName"
+                value={firstName}
                 variant="outlined"
                 required
                 fullWidth
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={event => onChangeHandler(event)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -82,7 +106,9 @@ export default function SignUp() {
                 id="lastName"
                 label="Last Name"
                 name="lastName"
+                value={lastName}
                 autoComplete="lname"
+                onChange={event => onChangeHandler(event)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -94,6 +120,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={event => onChangeHandler(event)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -106,6 +133,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={event => onChangeHandler(event)}
               />
             </Grid>
           </Grid>
@@ -115,17 +143,15 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={event => {
+              createUserWithEmailAndPasswordHandler(event, email, password)}}
           >
             Sign Up
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-
-              <Link to="/login">
-
-                <Button variant="outlined" size="medium" color="primary">
-                    Sign In
-                </Button>
+              <Link href="/signin" variant="body2">
+                {"Already have an account? Sign In"}
               </Link>
             </Grid>
           </Grid>
@@ -133,4 +159,6 @@ export default function SignUp() {
       </div>
     </Container>
   );
-}
+};
+
+export default SignUp;
