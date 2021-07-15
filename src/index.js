@@ -14,6 +14,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import AppearedInMoviesPage from "./pages/appearedInMoviesPage";
 import LoginPage from "./pages/loginPage";
+import SignupPage from "./pages/signupPage";
 import AuthProvider from "./contexts/authContext";
 import PrivateRoute from "./components/privateRoute";
 
@@ -44,6 +45,7 @@ const App = () => {
               <Route path="/movies/:id" component={MoviePage} />
               <Route path="/appearedInmovies/:id" component={AppearedInMoviesPage} />
               <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignupPage} />
               <Route exact path="/" component={HomePage} />
               <Redirect from="*" to="/" />
             </Switch>

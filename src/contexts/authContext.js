@@ -4,16 +4,16 @@ export const AuthContext = createContext(null);
 
 const AuthContextProvider = (props) => {
 
-  const [user, setUser] = useState({ username: null, password: null });
+  const [user, setUser] = useState({ username: null, email: null, password: null });
 
-  const authenticate = (username, password) => {
-    setUser({ username, password });
+  const authenticate = (username, email, password) => {
+    setUser({ username, email, password });
   };
 
-  const isAuthenticated = user.username === null ? false : true
+  const isAuthenticated = user.email === null ? false : true
 
   const signout = () => {
-    setTimeout(() => setUser( { username: null, password: null } ), 100);
+    setTimeout(() => setUser( { username: null, email: null, password: null } ), 100);
   };
 
   return (
