@@ -5,21 +5,22 @@ export const AuthContext = createContext(null);
 
 const AuthContextProvider = (props) => {
 
-  const [user, setUser] = useState({authDisplayName: null, authEmail: null});
+  const [currentUser, setCurrentUser] = useState({authDisplayName: null, authEmail: null});
 
   const authenticate = (displayName, email ) => {
-    setUser({authDisplayName: displayName, authEmail: email });
+    setCurrentUser({authDisplayName: displayName, authEmail: email });
+    console.log(currentUser);
   };
 
-  const isAuthenticated = user.authEmail === null ? false : true
+  const isAuthenticated = currentUser.authEmail === null ? false : true
 
   const signup = (displayName, email) => {
-    setUser({authDisplayName: displayName, authEmail: email});
+    setCurrentUser({authDisplayName: displayName, authEmail: email});
     
   };
 
   const signout = () => {
-    setTimeout(() => setUser( { authDisplayName: null, authEmail: null} ), 100);
+    setTimeout(() => setCurrentUser( { authDisplayName: null, authEmail: null} ), 100);
   };
 
   return (
@@ -29,6 +30,7 @@ const AuthContextProvider = (props) => {
         authenticate,
         signout,
         signup,
+        currentUser,
       }}
     >
       {props.children}

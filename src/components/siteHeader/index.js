@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Button from "@material-ui/core/Button";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -12,6 +13,9 @@ import Menu from "@material-ui/core/Menu";
 import { withRouter } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { AuthContext } from "../../contexts/authContext";
+import { auth } from "../../database/firebase";
+
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -26,16 +30,25 @@ const SiteHeader = ( { history }) => {
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const context = useContext(AuthContext);
 
   const menuOptions = [
     { label: "Home", path: "/" },
     { label: "Upcoming", path: "/movies/upcoming"},
     { label: "Favorites", path: "/movies/favorites" },
-    { label: "Must Watch", path: "/movies/watched" },
-    { label: "Option 4", path: "/" },
+    { label: "Must-Watch", path: "/movies/watched" },
+    { label: "Sign-In", path: "/signin" },
+    { label: "Sign-Up", path: "/signup" },
+    { label: "Sign-Out", path: "/signout" },
   ];
 
-  const handleMenuSelect = (pageURL) => {
+  const handleMenuSelect = async (pageURL) => {
+    if (pageURL == "/signout") {
+      await auth.signOut();
+      context.signout();
+      pageURL = "/"
+    }
+    console.log(pageURL);
     history.push(pageURL);
   };
 
@@ -49,6 +62,12 @@ const SiteHeader = ( { history }) => {
         <Toolbar>
           <Typography variant="h4" className={classes.title}>
             TMDB Client
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            {context.currentUser.authDisplayName ? (
+              <AccountCircleIcon/> 
+              ) : (<></>)}
+            {context.currentUser.authDisplayName}
           </Typography>
           <Typography variant="h6" className={classes.title}>
             All you ever wanted to know about Movies!

@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { signInWithGoogle } from "../database/firebase";
-import { auth } from "../database/firebase";
+import { auth, getUserDocument } from "../database/firebase";
 import { AuthContext } from "../contexts/authContext";
 import { Redirect } from "react-router-dom";
 
@@ -49,11 +49,14 @@ const SignIn = (props) => {
   // Either / or the protected path user tried to access.
   const { from } = props.location.state || { from: { pathname: "/" } };
 
-  const signInWithEmailAndPasswordHandler = (event,email, password) => {
+  const signInWithEmailAndPasswordHandler = async (event,email, password) => {
     event.preventDefault();
     try {
-      const user = auth.signInWithEmailAndPassword(email, password)
-      context.authenticate(user.displayName, user.email);
+      const {user} = await auth.signInWithEmailAndPassword(email, password)
+      console.log(user);
+      const document = await getUserDocument(user.uid);
+      console.log(document);
+      context.authenticate(document.displayName, document.email);
     } catch(error) {
       setError("Error signing in with password and email!");
       console.error("Error signing in with password and email", error);

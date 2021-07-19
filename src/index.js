@@ -33,8 +33,8 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <AuthProvider>
         <SiteHeader />      {/* New Header  */}
-        <AuthProvider>
           <MoviesContextProvider>
             {" "}
             <Switch>
@@ -52,7 +52,7 @@ const App = () => {
               <Redirect from="*" to="/" />
             </Switch>
           </MoviesContextProvider>
-        </AuthProvider>
+      </AuthProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
