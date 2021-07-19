@@ -53,13 +53,11 @@ const SignIn = (props) => {
     event.preventDefault();
     try {
       const {user} = await auth.signInWithEmailAndPassword(email, password)
-      console.log(user);
       const document = await getUserDocument(user.uid);
-      console.log(document);
       context.authenticate(document.displayName, document.email);
     } catch(error) {
-      setError("Error signing in with password and email!");
-      console.error("Error signing in with password and email", error);
+      setError(error.message);
+      console.error(error);
     };
   };
   
@@ -130,6 +128,12 @@ const SignIn = (props) => {
               </Link>
             </Grid>
           </Grid>
+
+          <Grid container>
+            <Typography component="h6" variant="h6">
+                {error}
+            </Typography>
+          </Grid>         
         </form>
       </div>
 

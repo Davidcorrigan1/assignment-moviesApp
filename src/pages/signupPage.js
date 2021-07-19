@@ -6,13 +6,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { auth, signInWithGoogle, generateUserDocument } from "../database/firebase";
 import { AuthContext } from "../contexts/authContext";
+import { Redirect } from "react-router-dom";
 
 const SignUp = () => {
   const useStyles = makeStyles((theme) => ({
@@ -48,11 +48,10 @@ const SignUp = () => {
     try{
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
       await generateUserDocument(user, {displayName});
-      console.log(displayName)
       context.authenticate(displayName, email);
     }
     catch(error){
-      setError('Error Signing up with email and password');
+      setError(error.message);
     }  
 
     setEmail("");
@@ -74,7 +73,12 @@ const SignUp = () => {
 
   const classes = useStyles();
 
-  return (
+  // Where to go next after sign-up. i.e. home page
+  const { next } =  { from: { pathname: "/" } };
+
+  return context.isAuthenticated ? (
+    <Redirect to={next} />
+    ) : (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -145,6 +149,13 @@ const SignUp = () => {
               </Link>
             </Grid>
           </Grid>
+          <Grid container>
+             <Grid item>
+              <Typography component="h6" variant="h6">
+                {error}
+              </Typography>
+             </Grid>
+          </Grid>  
         </form>
       </div>
     </Container>

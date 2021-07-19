@@ -39,10 +39,10 @@ const App = () => {
             {" "}
             <Switch>
               <Route exact path="/reviews/form" component={AddMovieReviewPage} />
-              <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
+              <PrivateRoute exact path="/movies/upcoming" component={UpcomingMoviesPage} />
               <Route path="/reviews/:id" component={MovieReviewPage} />
               <PrivateRoute path="/movies/favorites" component={FavoriteMoviesPage} />
-              <Route exact path="/movies/watched" component={WatchedMoviesPage} />
+              <PrivateRoute exact path="/movies/watched" component={WatchedMoviesPage} />
               <Route path="/movies/:id" component={MoviePage} />
               <Route path="/appearedInmovies/:id" component={AppearedInMoviesPage} />
               <Route path="/login" component={LoginPage} />
