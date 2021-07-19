@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState, useContext } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { signInWithGoogle } from "../database/firebase";
+import { auth } from "../database/firebase";
+import { AuthContext } from "../contexts/authContext";
+import { Redirect } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,10 +35,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+const SignIn = (props) => {
+
   const classes = useStyles();
 
-  return (
+  const context = useContext(AuthContext);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  // Set 'from' to path where browser is redirected after a successful login.
+  // Either / or the protected path user tried to access.
+  const { from } = props.location.state || { from: { pathname: "/" } };
+
+  const signInWithEmailAndPasswordHandler = (event,email, password) => {
+    event.preventDefault();
+    try {
+      const user = auth.signInWithEmailAndPassword(email, password)
+      context.authenticate(user.displayName, user.email);
+    } catch(error) {
+      setError("Error signing in with password and email!");
+      console.error("Error signing in with password and email", error);
+    };
+  };
+  
+  const onChangeHandler = (event) => {
+      const {name, value} = event.currentTarget;
+    
+      if(name === 'email') {
+          setEmail(value);
+      }
+      else if(name === 'password'){
+        setPassword(value);
+      }
+  };
+
+  return context.isAuthenticated ? (
+    <Redirect to={from} />
+  ) : (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -55,8 +92,10 @@ export default function SignIn() {
             id="email"
             label="Email Address"
             name="email"
+            value = {email}
             autoComplete="email"
             autoFocus
+            onChange = {(event) => onChangeHandler(event)}
           />
           <TextField
             variant="outlined"
@@ -64,10 +103,12 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
+            value = {password}
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange = {(event) => onChangeHandler(event)}
           />
           <Button
             type="submit"
@@ -75,6 +116,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}
           >
             Sign In
           </Button>
@@ -91,3 +133,5 @@ export default function SignIn() {
     </Container>
   );
 }
+
+export default SignIn;

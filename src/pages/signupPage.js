@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { auth, signInWithGoogle, generateUserDocument } from "../database/firebase";
+import { AuthContext } from "../contexts/authContext";
 
 const SignUp = () => {
   const useStyles = makeStyles((theme) => ({
@@ -34,17 +35,20 @@ const SignUp = () => {
     },
   }));
 
+  const context = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState(null);
 
   const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
     event.preventDefault();
+  
     try{
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user);
+      generateUserDocument(user, {displayName});
+      context.authenticate(displayName, email);
     }
     catch(error){
       setError('Error Signing up with email and password');
@@ -52,8 +56,7 @@ const SignUp = () => {
 
     setEmail("");
     setPassword("");
-    setFirstName("");
-    setLastName("");
+    setDisplayName("");
   };
 
   const onChangeHandler = event => {
@@ -63,10 +66,8 @@ const SignUp = () => {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
-    } else if (name === "firstName") {
-      setFirstName(value);
-    } else if (name === "lastName") {
-      setLastName(value);
+    } else if (name === "displayName") {
+      setDisplayName(value);
     }
   };
 
@@ -84,30 +85,16 @@ const SignUp = () => {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} >
               <TextField
-                autoComplete="fname"
-                name="firstName"
-                value={firstName}
+                name="displayName"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="displayName"
+                label="Display Name"
+                value={displayName}
                 autoFocus
-                onChange={event => onChangeHandler(event)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                value={lastName}
-                autoComplete="lname"
                 onChange={event => onChangeHandler(event)}
               />
             </Grid>
@@ -118,6 +105,7 @@ const SignUp = () => {
                 fullWidth
                 id="email"
                 label="Email Address"
+                value={email}
                 name="email"
                 autoComplete="email"
                 onChange={event => onChangeHandler(event)}
@@ -131,6 +119,7 @@ const SignUp = () => {
                 name="password"
                 label="Password"
                 type="password"
+                value={password}
                 id="password"
                 autoComplete="current-password"
                 onChange={event => onChangeHandler(event)}
@@ -148,7 +137,7 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container justifycontent="flex-end">
             <Grid item>
               <Link href="/signin" variant="body2">
                 {"Already have an account? Sign In"}

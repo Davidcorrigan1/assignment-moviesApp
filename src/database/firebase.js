@@ -30,11 +30,11 @@ export const generateUserDocument = async (user, additionalData) => {
   const snapshot = await userRef.get();
 
   if (!snapshot.exists) {
-    const { firstName, lastName, email } = user;
+    const {email, displayName } = user;
+  
     try {
       await userRef.set({
-        firstName,
-        lastName,
+        displayName,
         email,
         ...additionalData
       });
