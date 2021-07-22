@@ -48,7 +48,7 @@ const SignUp = () => {
     try{
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
       await generateUserDocument(user, {displayName});
-      context.authenticate(displayName, email);
+      await context.authenticate(displayName, email);
     }
     catch(error){
       setError(error.message);

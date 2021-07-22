@@ -54,7 +54,7 @@ const SignIn = (props) => {
     try {
       const {user} = await auth.signInWithEmailAndPassword(email, password)
       const document = await getUserDocument(user.uid);
-      context.authenticate(document.displayName, document.email);
+      await context.authenticate(document.displayName, document.email);
     } catch(error) {
       setError(error.message);
       console.error(error);

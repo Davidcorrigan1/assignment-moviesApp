@@ -112,3 +112,68 @@
     }
     return response.json();
   };
+
+  // returns a request Token json format
+  export const requestUserToken = async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_TMDB_KEY}`);
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  };
+
+  // Authenticates the request Token
+  export const authenticateToken = async (requestToken) => {
+    const response = await fetch(
+      `https://thingproxy.freeboard.io/fetch/https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=http://www.themoviedb.org/authenticate/allow`);
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    };
+    return response;
+  };
+
+  // Authenticates the request Token
+  export const authenticateWithLogin = async (requestToken) => {
+
+    const data ={
+      "username": 'davidcorrigan1@gmail.com',
+      "password": 'WBL9hr@4SL8kdv3',
+      "request_token": requestToken,
+    };
+    console.log(data);
+
+    const requestOption = {
+      method: 'POST',
+      headers: {  'Content-Type': 'application/json',
+                  'Accept': 'application/json'},
+      body: JSON.stringify(data)
+    };
+
+    const response = await fetch(
+      `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${process.env.REACT_APP_TMDB_KEY}`, requestOption);
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    };
+    return response;
+  };
+
+  // Authenticates the request Token
+  export const createSessionId = async (requestToken) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: {  'Content-Type': 'application/json',
+                  'Accept': 'application/json'},
+      body: JSON.stringify({"request_token": requestToken})
+    };
+
+    //Get a session id
+    const response = await fetch(
+      `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_TMDB_KEY}`, requestOptions);
+    if (!response.ok) {
+      console.log(requestOptions);
+      throw new Error(response.json().message);
+    };
+    console.log(requestOptions);
+    return response.json();
+  };

@@ -43,12 +43,11 @@ const SiteHeader = ( { history }) => {
   ];
 
   const handleMenuSelect = async (pageURL) => {
-    if (pageURL == "/signout") {
+    if (pageURL === "/signout") {
       await auth.signOut();
       context.signout();
       pageURL = "/"
     }
-    console.log(pageURL);
     history.push(pageURL);
   };
 
