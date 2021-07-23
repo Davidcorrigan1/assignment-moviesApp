@@ -1,14 +1,18 @@
 import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
+import { AuthContext } from "../contexts/authContext";
 import { useQueries } from "react-query";
-import { getMovie } from "../api/tmdb-api";
+import { getMovie, retrieveListArray } from "../api/tmdb-api";
 import Spinner from '../components/spinner';
 import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
 
 const FavoriteMoviesPage = () => {
   const {favorites: movieIds } = useContext(MoviesContext);
+  //const {context } = useContext(AuthContext);
+  //const result = await retrieveListArray(context.currentUser.listId);
+  //console.log(result); 
 
   // Create an array of queries and run in parallel.
   const favoriteMovieQueries = useQueries(

@@ -158,7 +158,7 @@
     return response;
   };
 
-  // Authenticates the request Token
+  // Create a session id which can be used to create lists
   export const createSessionId = async (requestToken) => {
     const requestOptions = {
       method: 'POST',
@@ -167,13 +167,78 @@
       body: JSON.stringify({"request_token": requestToken})
     };
 
-    //Get a session id
+  //Get a session id
+  const response = await fetch(
+    `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_TMDB_KEY}`, requestOptions);
+  if (!response.ok) {
+    throw new Error(response.json().message);
+  };
+  return response.json();
+  };
+
+  // Create a List using the session id
+  export const createNewList = async (sessionId, listName, listDescription) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: {  'Content-Type': 'application/json',
+                  'Accept': 'application/json'},
+      body: JSON.stringify({"name": listName, "description": listDescription, "language": "en"})
+    };
+
     const response = await fetch(
-      `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_TMDB_KEY}`, requestOptions);
+      `https://api.themoviedb.org/3/list?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`, requestOptions);
     if (!response.ok) {
-      console.log(requestOptions);
       throw new Error(response.json().message);
     };
-    console.log(requestOptions);
     return response.json();
   };
+
+  //--------------------------------------------------------------------------------------------
+  // Add to an existing TMDB List  
+  //--------------------------------------------------------------------------------------------
+  export const addToList = async (sessionId, listId, movieId) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: {  'Content-Type': 'application/json;charset=utf-8',
+                  'Accept': 'application/json'},
+      body: JSON.stringify({"media_id": movieId})
+    };
+
+    const response = await fetch(
+      `https://api.themoviedb.org/3/list/${listId}/add_item?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`, requestOptions);
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    };
+    return response.json();
+  };
+
+   //--------------------------------------------------------------------------------------------
+  // Remove movie to an existing TMDB List  
+  //--------------------------------------------------------------------------------------------
+  export const removeFromList = async (sessionId, listId, movieId) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: {  'Content-Type': 'application/json;charset=utf-8',
+                  'Accept': 'application/json'},
+      body: JSON.stringify({"media_id": movieId})
+    };
+
+    const response = await fetch(
+      `https://api.themoviedb.org/3/list/${listId}/remove_item?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`, requestOptions);
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    };
+    return response.json();
+  };
+
+  // Retrieve list data
+  export const retrieveListArray = async (listId) => {
+    //Retrieve list Data
+    const response = await fetch(
+      `https://api.themoviedb.org/3/list/${listId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`);
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    };
+    return response.json();
+  };
+  

@@ -52,9 +52,7 @@ const SignIn = (props) => {
   const signInWithEmailAndPasswordHandler = async (event,email, password) => {
     event.preventDefault();
     try {
-      const {user} = await auth.signInWithEmailAndPassword(email, password)
-      const document = await getUserDocument(user.uid);
-      await context.authenticate(document.displayName, document.email);
+      await context.authenticate(email, password);
     } catch(error) {
       setError(error.message);
       console.error(error);
