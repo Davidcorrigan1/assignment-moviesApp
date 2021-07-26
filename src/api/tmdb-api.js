@@ -233,8 +233,7 @@
 
   // Retrieve list data
   export const retrieveListArray = async (listId) => {
-    console.log("retrieve Array of favorites")
-    console.log(listId)
+
     // eslint-disable-next-line no-unused-vars
     const response = await fetch(
       `https://api.themoviedb.org/3/list/${listId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`);
@@ -244,3 +243,14 @@
     return response.json();
   };
   
+    // Check if item already in list data
+    export const checkListArray = async (listId, movieId) => {
+
+      // eslint-disable-next-line no-unused-vars
+      const response = await fetch(
+        `https://api.themoviedb.org/3/list/${listId}/item_status?api_key=${process.env.REACT_APP_TMDB_KEY}&movie_id=${movieId}`);
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      };
+      return response.json()
+    };

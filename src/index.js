@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Redirect, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage"; // NEW
@@ -13,7 +13,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import AppearedInMoviesPage from "./pages/appearedInMoviesPage";
-import LoginPage from "./pages/loginPage";
 import SignupPage from "./pages/signupPage";
 import SigninPage from "./pages/signinPage"; 
 import AuthProvider from "./contexts/authContext";
@@ -45,12 +44,11 @@ const App = () => {
               <PrivateRoute exact path="/movies/watched" component={WatchedMoviesPage} />
               <Route path="/movies/:id" component={MoviePage} />
               <Route path="/appearedInmovies/:id" component={AppearedInMoviesPage} />
-              <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignupPage} />
               <Route path="/signin" component={SigninPage} />
               <Route exact path="/" component={HomePage} />
               <Redirect from="*" to="/" />
-            </Switch>
+            </Switch> 
           </MoviesContextProvider>
       </AuthProvider>
       </BrowserRouter>

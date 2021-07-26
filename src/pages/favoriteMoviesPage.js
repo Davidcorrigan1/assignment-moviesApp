@@ -10,34 +10,12 @@ import WriteReview from "../components/cardIcons/writeReview";
 
 const FavoriteMoviesPage = () => {
 
-  const [favoriteArray, setFavoriteArray] = useState([]);
-  const {favorites: movieIds} = useContext(MoviesContext);
-  const context = useContext(AuthContext);
-
-  
-
-  const listId = context.currentUser.listId;
-  useEffect(() => {
-      async function getFavoriteArray(listId) {
-        const returnArray = await retrieveListArray(listId);
-        console.log("In the useEffect")
-        console.log(returnArray.items);
-        const idArray = returnArray.items.map(item => item.id)
-        console.log(idArray);
-        setFavoriteArray(idArray);
-      };
-
-      getFavoriteArray(listId);
-    }, []
-  )
-  
-  console.log("list!");
-  console.log(favoriteArray);
+  const {favorites: movieIds } = useContext(MoviesContext);
 
   // Create an array of queries and run in parallel.
   const favoriteMovieQueries = useQueries(
-    //movieIds.map((movieId) => {
-    favoriteArray.map((movieId) => {
+    movieIds.map((movieId) => {
+    //favoriteArray.map((movieId) => {
 
     return {
         queryKey: ["movie", { id: movieId}],

@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from 'react-query'
 import Spinner from '../components/spinner'
-import {getMovies} from '../api/tmdb-api'
-import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import {getMovies} from '../api/tmdb-api';
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';
+import { AuthContext } from "../contexts/authContext";
+import { MoviesContext } from "../contexts/moviesContext";
 
 const HomePage = (props) => {
   const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
+  
+  const context = useContext(AuthContext);
+  const movieContext = useContext(MoviesContext);
 
+  // This will trigger the moviesContext favorite array to be populated from the Users list of Favorites in TMDB
+  if (context.currentUser.listId) {
+    const res = movieContext.returnFavoriteList(context.currentUser.listId);
+  }
+
+  
   if (isLoading) {
     return <Spinner />
   }
