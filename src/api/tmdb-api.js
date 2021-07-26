@@ -233,7 +233,9 @@
 
   // Retrieve list data
   export const retrieveListArray = async (listId) => {
-    //Retrieve list Data
+    console.log("retrieve Array of favorites")
+    console.log(listId)
+    // eslint-disable-next-line no-unused-vars
     const response = await fetch(
       `https://api.themoviedb.org/3/list/${listId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`);
     if (!response.ok) {
