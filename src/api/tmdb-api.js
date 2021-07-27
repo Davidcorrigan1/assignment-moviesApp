@@ -1,4 +1,6 @@
+  //--------------------------------------------------------------------------------------------
   // returns as array of movies in json format
+  //--------------------------------------------------------------------------------------------
   export const getMovies = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -9,7 +11,9 @@
     return response.json();
   };
 
+  //--------------------------------------------------------------------------------------------
   // returns as array of movies in json format for page requested
+  //--------------------------------------------------------------------------------------------
   export const getMoviesPage = async ( args) => {
     const [, { page }] = args.queryKey;
     console.log("API: " + page);
@@ -22,8 +26,9 @@
     return response.json();
   };
   
-    
+  //--------------------------------------------------------------------------------------------  
   // Returns the movie details based on a movie id.
+  //--------------------------------------------------------------------------------------------
   export const getMovie = async ( args ) => {
     console.log(args)
     // eslint-disable-next-line no-unused-vars
@@ -37,7 +42,9 @@
     return response.json();
   };
 
+   //--------------------------------------------------------------------------------------------  
    // Returns the person details based on a person id.
+   //--------------------------------------------------------------------------------------------
    export const getPerson = async ( args ) => {
     console.log(args)
     // eslint-disable-next-line no-unused-vars
@@ -51,7 +58,9 @@
     return response.json();
   };
 
+  //--------------------------------------------------------------------------------------------
   //returns the cast of a given movie based on movie id
+  //--------------------------------------------------------------------------------------------
   export const getMovieCast = async ( args ) => {
     // eslint-disable-next-line no-unused-vars
     const [prefix, { id }] = args.queryKey;
@@ -64,7 +73,9 @@
     return response.json();
   };
 
+  //--------------------------------------------------------------------------------------------
   // returns the movies in which a person is involved, based on person id.
+  //--------------------------------------------------------------------------------------------
   export const getCastMovies = async ( args ) => {
     // eslint-disable-next-line no-unused-vars
     const [prefix, { id }] = args.queryKey;
@@ -78,7 +89,9 @@
     return response.json();
   };
 
+  //--------------------------------------------------------------------------------------------
   // returns an array of genres 
+  //--------------------------------------------------------------------------------------------
   export const getGenres = async () => {
     const response = await  fetch(
       "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
@@ -91,7 +104,9 @@
     return response.json();
   };
   
+  //--------------------------------------------------------------------------------------------
   // returns an array of moview reviews based on movie id
+  //--------------------------------------------------------------------------------------------
   export const getMovieReviews = (id) => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
@@ -103,7 +118,9 @@
       });
   };
 
+  //--------------------------------------------------------------------------------------------
   // returns an array of movie images based on movie id
+  //--------------------------------------------------------------------------------------------
   export const getMovieImages = async ({queryKey}) => {
     // eslint-disable-next-line no-unused-vars
     const [prefix, { id }] = queryKey;
@@ -116,7 +133,9 @@
     return response.json();
   };
 
+  //--------------------------------------------------------------------------------------------
   // returns an array of upcoming movies.
+  //--------------------------------------------------------------------------------------------
   export const getUpcomingMovies = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
@@ -127,7 +146,24 @@
     return response.json();
   };
 
+    //--------------------------------------------------------------------------------------------
+  // returns an array of upcoming movies by page.
+  //--------------------------------------------------------------------------------------------
+  export const getUpcomingMoviesPage = async (args) => {
+    const [, { page }] = args.queryKey;
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
+    );
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  };
+
+
+  //--------------------------------------------------------------------------------------------
   // returns a request Token json format
+  //--------------------------------------------------------------------------------------------
   export const requestUserToken = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_TMDB_KEY}`);
@@ -137,7 +173,9 @@
     return response.json();
   };
 
+  //--------------------------------------------------------------------------------------------
   // Authenticates the request Token
+  //--------------------------------------------------------------------------------------------
   export const authenticateToken = async (requestToken) => {
     const response = await fetch(
       `https://thingproxy.freeboard.io/fetch/https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=http://www.themoviedb.org/authenticate/allow`);
@@ -147,7 +185,9 @@
     return response;
   };
 
+  //--------------------------------------------------------------------------------------------
   // Authenticates the request Token
+  //--------------------------------------------------------------------------------------------
   export const authenticateWithLogin = async (requestToken) => {
 
     const data ={
@@ -172,7 +212,9 @@
     return response;
   };
 
+  //--------------------------------------------------------------------------------------------
   // Create a session id which can be used to create lists
+  //--------------------------------------------------------------------------------------------
   export const createSessionId = async (requestToken) => {
     const requestOptions = {
       method: 'POST',
@@ -181,16 +223,17 @@
       body: JSON.stringify({"request_token": requestToken})
     };
 
-  //Get a session id
-  const response = await fetch(
-    `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_TMDB_KEY}`, requestOptions);
-  if (!response.ok) {
-    throw new Error(response.json().message);
-  };
-  return response.json();
-  };
+    const response = await fetch(
+      `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_TMDB_KEY}`, requestOptions);
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    };
+    return response.json();
+    };
 
+  //--------------------------------------------------------------------------------------------
   // Create a List using the session id
+  //--------------------------------------------------------------------------------------------
   export const createNewList = async (sessionId, listName, listDescription) => {
     const requestOptions = {
       method: 'POST',
@@ -226,8 +269,8 @@
     return response.json();
   };
 
-   //--------------------------------------------------------------------------------------------
-  // Remove movie to an existing TMDB List  
+  //--------------------------------------------------------------------------------------------
+  // Remove movie from an existing TMDB List  
   //--------------------------------------------------------------------------------------------
   export const removeFromList = async (sessionId, listId, movieId) => {
     const requestOptions = {
@@ -245,7 +288,9 @@
     return response.json();
   };
 
+  //--------------------------------------------------------------------------------------------
   // Retrieve list data
+  //--------------------------------------------------------------------------------------------
   export const retrieveListArray = async (listId) => {
 
     // eslint-disable-next-line no-unused-vars
@@ -257,14 +302,16 @@
     return response.json();
   };
   
-    // Check if item already in list data
-    export const checkListArray = async (listId, movieId) => {
+  //--------------------------------------------------------------------------------------------
+  // Check if item already in list data
+  //--------------------------------------------------------------------------------------------
+  export const checkListArray = async (listId, movieId) => {
 
-      // eslint-disable-next-line no-unused-vars
-      const response = await fetch(
-        `https://api.themoviedb.org/3/list/${listId}/item_status?api_key=${process.env.REACT_APP_TMDB_KEY}&movie_id=${movieId}`);
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      };
-      return response.json()
+    // eslint-disable-next-line no-unused-vars
+    const response = await fetch(
+      `https://api.themoviedb.org/3/list/${listId}/item_status?api_key=${process.env.REACT_APP_TMDB_KEY}&movie_id=${movieId}`);
+    if (!response.ok) {
+      throw new Error(response.json().message);
     };
+    return response.json()
+  };

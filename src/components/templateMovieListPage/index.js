@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-function MovieListPageTemplate({ movies, title, action }) {
+function MovieListPageTemplate({ movies, title, action, pagination }) {
   const classes = useStyles();
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
@@ -49,9 +49,11 @@ function MovieListPageTemplate({ movies, title, action }) {
         </Grid>
         <MovieList action={action} movies={displayedMovies}></MovieList>
       </Grid>
+       
       <Grid  className={classes.marginAutoItem}>
-        <PaginationCard/>
-      </Grid>
+        {(pagination) ?  
+        <PaginationCard/> : <></>}
+      </Grid> 
     </Grid>
   );
 }

@@ -1,12 +1,19 @@
-import React from "react";
+import React, {useContext} from "react";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner'
-import { getUpcomingMovies } from "../api/tmdb-api";
+import { getUpcomingMoviesPage } from "../api/tmdb-api";
 import AddToWatchListIcon from '../components/cardIcons/addToWatchList';
+import { MoviesContext } from "../contexts/moviesContext";
+import { TrainRounded } from "@material-ui/icons";
 
 const UpcomingMoviesPage = (props) => {
-  const {  data, error, isLoading, isError }  = useQuery('upcoming', getUpcomingMovies)
+  const movieContext = useContext(MoviesContext);
+  const page = movieContext.homePageNo;
+  const pagination = true;
+
+  //const {  data, error, isLoading, isError }  = useQuery(['discover', {page}], getMoviesPage)
+  const {  data, error, isLoading, isError }  = useQuery(['upcoming', {page}], getUpcomingMoviesPage)
 
   if (isLoading) {
     return <Spinner />
@@ -28,6 +35,7 @@ const UpcomingMoviesPage = (props) => {
       action={(movie) => {
         return <AddToWatchListIcon movie={movie} />
       }}
+      pagination={pagination}
     />
   );
 };

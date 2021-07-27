@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PaginationCard() {
+
   const classes = useStyles();
   const movieContext = useContext(MoviesContext);
 
