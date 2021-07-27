@@ -8,6 +8,7 @@ const MoviesContextProvider = (props) => {
   const [myReviews, setMyReviews] = useState( {} ); 
   const [favorites, setFavorites] = useState( [] );
   const [mustWatch, setMustWatch] = useState( [] );
+  const [homePageNo, setHomePageNo] = useState( 1 );
 
   const context = useContext(AuthContext);
 
@@ -59,18 +60,24 @@ const MoviesContextProvider = (props) => {
     ) )
   };
 
+  // Function to set home page number
+  const setHomePageNumber = (page) => {
+    setHomePageNo(page);
+  };
 
   return (
     <MoviesContext.Provider
       value={{
         favorites,
+        homePageNo,
         addToFavorites,
         removeFromFavorites,
         addReview,
         mustWatch,
         addToMustWatch,
         removeFromMustWatch,
-        returnFavoriteList
+        returnFavoriteList,
+        setHomePageNumber
       }}
     >
       {props.children}

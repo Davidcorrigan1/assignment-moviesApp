@@ -4,10 +4,14 @@ import FilterCard from "../filterMoviesCard";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import MovieList from "../movieList";
+import PaginationCard from "../paginationCard";
 
 const useStyles = makeStyles({
   root: {
     padding: "20px",
+  },
+  marginAutoItem: {
+    margin: 'auto'
   },
 });
 
@@ -44,6 +48,9 @@ function MovieListPageTemplate({ movies, title, action }) {
           />
         </Grid>
         <MovieList action={action} movies={displayedMovies}></MovieList>
+      </Grid>
+      <Grid  className={classes.marginAutoItem}>
+        <PaginationCard/>
       </Grid>
     </Grid>
   );
