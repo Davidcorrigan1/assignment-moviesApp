@@ -1,31 +1,35 @@
 # Assignment - ReactJS app.
 
-Name: ... your name ...
+Name: David Corrigan
 
 ## Overview.
 
-...... State the app concept and objectives. If it's the Movies Fan app extension, only state the additional objectives .........
+The objective of my assignment are the following extentions to the MovieApp
+
++ Adding Authentication using Firebase Auth
++ Adding Firebase storage for user data, like TMDB List number and username
++ Using the List functionality in the TMDB api to store favorites for a logged in user.
++ Pagination on the Homepage and the Upcoming Movies Page
 
 
-...... A bullet-point list of user features. If it's the Movies Fan app extension, only list new/modified features...... 
- 
- + Feature 1
- + Feature 2
- + Feature 3
- + etc
- + etc
 
 ## Setup requirements.
 
 ...... A brief explanation (to a third party) of any non-standard setup steps necessary to run your app/client locally (after cloning the repo) ........
 
++ A login to Firebase is required
++ A login to TMDB is required
++
+
 ## API Data Model.
 
-..... [For non-Movies Fan app] Insert a diagram of the API's data model (see example below) AND/OR a sample(s) of the JSON documents returned by its endpoints ........
-
-![][model]
-
 ......[For the Movies Fan app] Specify the additional TMDB endpoints used and show sample responses, in JSON .........
+
+API TMDB Endpoints Used with sample results:
+
++ tehehehhe
+    + jbajsbfjasf
+
 
 ## App Design.
 
