@@ -191,8 +191,8 @@
   export const authenticateWithLogin = async (requestToken) => {
 
     const data ={
-      "username": 'davidcorrigan1@gmail.com',
-      "password": 'WBL9hr@4SL8kdv3',
+      "username": process.env.REACT_APP_TMDB_USERNAME,
+      "password": process.env.REACT_APP_TMDB_PASSWORD,
       "request_token": requestToken,
     };
     console.log(data);

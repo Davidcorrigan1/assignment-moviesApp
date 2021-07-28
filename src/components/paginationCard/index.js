@@ -27,7 +27,7 @@ export default function PaginationCard() {
   return (
     <div className={classes.root}>
       <Typography component="h1" variant="h4">Page: {movieContext.homePageNo}</Typography>
-      <Pagination count={10} page={movieContext.homePageNo} onChange={handleChange} />
+      <Pagination count={20} page={movieContext.homePageNo} onChange={handleChange} />
     </div>
   );
 }
