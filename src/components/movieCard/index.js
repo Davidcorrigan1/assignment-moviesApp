@@ -17,8 +17,7 @@ import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import img from '../../images/film-poster-placeholder.png';
 import { MoviesContext } from "../../contexts/moviesContext";
-import { AuthContext } from "../../contexts/authContext";
-import { retrieveListArray } from "../../api/tmdb-api";
+
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -33,32 +32,12 @@ const useStyles = makeStyles({
 export default function MovieCard({ movie, action }) {
   const classes = useStyles();
   const { favorites, mustWatch } = useContext(MoviesContext);
-  const context = useContext(AuthContext);
-  const [favoriteArray, setFavoriteArray] = useState([]);
-
-  const listId = context.currentUser.listId;
-
-  useEffect(() => {
-      async function getFavoriteArray(listId) {
-        
-        const returnArray = await retrieveListArray(listId);
-        const idArray = returnArray.items.map(item => item.id)
-        setFavoriteArray(idArray);
-      };
-      if (context.currentUser.isAuthenticated) {
-        console.log("Authentiated");
-        getFavoriteArray(listId);
-      }
-    }, []
-  )
-
 
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
   } else {
     movie.favorite = false
   };
-
 
   if (mustWatch.find((id) => id === movie.id)) {
     movie.mustWatch = true;
