@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect  } from "react";
+import React, { useContext  } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -51,8 +51,8 @@ export default function MovieCard({ movie, action }) {
         className={classes.header}
         avatar={
           //both ? (
-          (movie.favorite && movie.mustWatch) ? (         // Allowing both the favorite and must watch icon
-            <AvatarGroup max={2}>                         // Using AvatarGroup to handle multiple
+          (movie.favorite && movie.mustWatch) ? (          
+            <AvatarGroup max={2}>                           
               <Avatar className={classes.avatar}>
                 <FavoriteIcon />
               </Avatar>

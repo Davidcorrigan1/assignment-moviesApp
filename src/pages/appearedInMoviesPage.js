@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getCastMovies, getPerson } from "../api/tmdb-api";
 import { useQuery } from "react-query";
@@ -28,7 +28,7 @@ const AppearedInMoviesPage = (props) => {
   if (moviesIsError) {
     return <h1>{moviesError.message}</h1>
   }  else if (actorIsError) {
-    return<h1>actorError.message</h1>
+    return <h1>{actorError.message}</h1>
   };
 
   console.log(movies);

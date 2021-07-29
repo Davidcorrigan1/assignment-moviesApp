@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../headerMovieList";
-import FilterCard from "../filterMoviesCard";
 import SearchCard from "../searchHeader";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,24 +15,8 @@ const useStyles = makeStyles({
   },
 });
 
-function MovieSearchPageTemplate({ movies, title, action, pagination }) {
+function MovieSearchPageTemplate({ movies, title, action, pagination, handleChange, genres, years, certificates, searchButton }) {
   const classes = useStyles();
-  const [nameFilter, setNameFilter] = useState("");
-  const [genreFilter, setGenreFilter] = useState("0");
-  const genreId = Number(genreFilter);
-
-  let displayedMovies = movies
-    .filter((m) => {
-      return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
-    })
-    .filter((m) => {
-      return genreId > 0 ? m.genre_ids.includes(genreId) : true;
-    });
-
-  const handleChange = (type, value) => {
-    if (type === "name") setNameFilter(value);
-    else setGenreFilter(value);
-  };
 
   return (
     <Grid container className={classes.root}>
@@ -41,10 +24,17 @@ function MovieSearchPageTemplate({ movies, title, action, pagination }) {
         <Header title={title} />
       </Grid>
       <Grid item xs={12}>
-        <SearchCard />
+        <SearchCard 
+            onUserInput={handleChange}
+            genre={genres}
+            year={years}
+            cert={certificates}
+            searchButtonAction={searchButton}
+        />
       </Grid>
-      <Grid item container spacing={5}>
-        <MovieList action={action} movies={displayedMovies}></MovieList>
+      <Grid item container spacing={6} className={classes.root}>
+      <Grid item xs={12}></Grid>
+        <MovieList action={action} movies={movies}></MovieList>
       </Grid>
        
       <Grid  className={classes.marginAutoItem}>

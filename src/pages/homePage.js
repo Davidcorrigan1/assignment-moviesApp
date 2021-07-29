@@ -18,9 +18,8 @@ const HomePage = (props) => {
   
   // This will trigger the moviesContext favorite array to be populated from the Users list of Favorites in TMDB
   if (context.currentUser.listId) {
-    const res = movieContext.returnFavoriteList(context.currentUser.listId);
+    movieContext.returnFavoriteList(context.currentUser.listId);
   }
-
   
   if (isLoading) {
     return <Spinner />

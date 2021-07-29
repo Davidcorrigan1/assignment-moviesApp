@@ -17,7 +17,7 @@ const MoviesContextProvider = (props) => {
       const found = await checkListArray(context.currentUser.listId, movie.id )
       console.log(found);
       if (!found.item_present) {
-        const result = await addToList(context.currentUser.sessionId, context.currentUser.listId, movie.id );
+        await addToList(context.currentUser.sessionId, context.currentUser.listId, movie.id );
         const result1 = await retrieveListArray(context.currentUser.listId);
         const idArray = result1.items.map(item => item.id)
         setFavorites(idArray);
@@ -26,7 +26,7 @@ const MoviesContextProvider = (props) => {
 
   // This will remove a movie from a TMDB list and update the favorites state variable
   const removeFromFavorites = async (movie) => {
-    const result = await removeFromList(context.currentUser.sessionId, context.currentUser.listId, movie.id );
+    await removeFromList(context.currentUser.sessionId, context.currentUser.listId, movie.id );
     const result1 = await retrieveListArray(context.currentUser.listId);
     const idArray = result1.items.map(item => item.id)
     setFavorites(idArray);

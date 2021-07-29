@@ -45,7 +45,7 @@ export default function CastCard({ cast, action }) {
                 width: classes.width
               }}
               actionIcon={
-                <Link to={`/appearedInmovies/${cast.id}`}>
+              <Link to={`/appearedInmovies/${cast.id}`}>
                 <Button  variant="contained" size="medium" color="primary">
                   MOVIES
                 </Button>

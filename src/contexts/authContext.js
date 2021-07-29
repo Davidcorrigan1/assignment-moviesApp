@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import { auth, signInWithGoogle, getUserDocument, generateUserDocument } from "../database/firebase";
+import { auth, getUserDocument, generateUserDocument } from "../database/firebase";
 import { requestUserToken, createSessionId, authenticateWithLogin, createNewList } from '../api/tmdb-api'
 
 export const AuthContext = createContext(null);

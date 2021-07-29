@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
 import Spinner from '../spinner';
 import { getGenres, getCertifications } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
@@ -17,25 +19,28 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     padding: theme.spacing(1.5),
     margin: 0,
+    backgroundColor: "rgb(255, 255, 255)",
   },
   tagLine: {
     fontSize: "1.5rem",
   },
   formControl: {
+    display: "flex",
     margin: theme.spacing(2),
     minWidth: 180,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  button: {
+    margin: theme.spacing(1),
+  },
 }));
 
-const SearchHeader = ( ) => {
+const SearchHeader = (props) => {
   const classes = useStyles();
 
-  const [genre, setGenre] = useState([]);
-  const [certificate, setCertificate] = useState([]);
-  const [year, setYear] = useState([]);
+
 
   const { data: genreData, error: genreError, isLoading: genreIsLoading, isError: genreIsError } = useQuery("genres", getGenres);
   const { data: certData, error: certError, isLoading: certIsLoading, isError: certIsError } = useQuery("certificates", getCertifications);
@@ -72,27 +77,30 @@ const SearchHeader = ( ) => {
   }
   const yearsArray = generateArrayOfYears(20);
 
-  const handleChange = (event, type, value) => {
-        if (type === "genre") {
-            setGenre(value); 
-        }
-        else if (type === "cert") {
-            setCertificate(value);
-        } else {
-            setYear(value);
-        }
-    };
-  
+  const onClickButton = (e) => {
+      e.preventDefault();
+      console.log("handleChangeinButtonOnClick");
+      props.searchButtonAction();
+  }
 
+  const handleChange = (e, type, value) => {
+    e.preventDefault();
+    console.log("handleChangeinSearchHeader");
+    props.onUserInput(type, value); // NEW
+  };
+  
   const handleChangeCert = (event) => {
+    event.preventDefault();
     handleChange(event, "cert", event.target.value);
   };
 
   const handleChangeGenre = (event) => {
+    event.preventDefault();
     handleChange(event, "genre", event.target.value);
   };
 
   const handleChangeYear = (event) => {
+    event.preventDefault();
     handleChange(event, "year", event.target.value);
   };
 
@@ -104,8 +112,7 @@ const SearchHeader = ( ) => {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          value={genre}
-          multiple
+          value={props.genre}
           onChange={handleChangeGenre}
         >
           <MenuItem value="">
@@ -125,8 +132,7 @@ const SearchHeader = ( ) => {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          value={year}
-          multiple
+          value={props.year}
           onChange={handleChangeYear}
         >
           <MenuItem value="">
@@ -146,8 +152,7 @@ const SearchHeader = ( ) => {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          value={certificate}
-          multiple
+          value={props.cert}
           onChange={handleChangeCert}
         >
           <MenuItem value="">
@@ -162,6 +167,16 @@ const SearchHeader = ( ) => {
             })}
         </Select>
       </FormControl>
+      <Button
+        type="button"
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        startIcon={<SearchIcon />}
+        onClick={onClickButton}
+      >
+        Search
+      </Button>
 
     </Paper>
   );
