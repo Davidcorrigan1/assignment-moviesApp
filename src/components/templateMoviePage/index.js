@@ -7,9 +7,6 @@ import GridListTile from "@material-ui/core/GridListTile";
 import { getMovieImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../spinner";
-import SampleCast from "../../stories/sampleCastData";
-import AddToFavoritesIcon from "../../components/cardIcons/addToFavorites";
-import CastList from "../../components/castList";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -30,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchHeader = ( { movie, history}) => {
+const SearchHeader = ( ) => {
   const classes = useStyles();
 
-  const [genre, setGenre] = useState('');
-  const [certificate, setCertificate] = useState('');
-  const [year, setYear] = useState('');
+  const [genre, setGenre] = useState([]);
+  const [certificate, setCertificate] = useState([]);
+  const [year, setYear] = useState([]);
 
   const { data: genreData, error: genreError, isLoading: genreIsLoading, isError: genreIsError } = useQuery("genres", getGenres);
   const { data: certData, error: certError, isLoading: certIsLoading, isError: certIsError } = useQuery("certificates", getCertifications);
@@ -73,8 +73,9 @@ const SearchHeader = ( { movie, history}) => {
   const yearsArray = generateArrayOfYears(20);
 
   const handleChange = (event, type, value) => {
-        if (type === "genre") 
-            setGenre(value);
+        if (type === "genre") {
+            setGenre(value); 
+        }
         else if (type === "cert") {
             setCertificate(value);
         } else {
@@ -104,6 +105,7 @@ const SearchHeader = ( { movie, history}) => {
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           value={genre}
+          multiple
           onChange={handleChangeGenre}
         >
           <MenuItem value="">
@@ -111,7 +113,7 @@ const SearchHeader = ( { movie, history}) => {
           </MenuItem>
           {genres.map((genre) => {
               return (
-                <MenuItem key={genre.id} value={genre.name}>
+                <MenuItem key={genre.id} value={genre.id}>
                   {genre.name}
                 </MenuItem>
               );
@@ -124,6 +126,7 @@ const SearchHeader = ( { movie, history}) => {
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           value={year}
+          multiple
           onChange={handleChangeYear}
         >
           <MenuItem value="">
@@ -144,6 +147,7 @@ const SearchHeader = ( { movie, history}) => {
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           value={certificate}
+          multiple
           onChange={handleChangeCert}
         >
           <MenuItem value="">

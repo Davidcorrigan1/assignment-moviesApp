@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import PageTemplate from "../components/templateMovieSearchPage";
 import { useQuery } from 'react-query'
 import Spinner from '../components/spinner'
 import { getMoviesPage} from '../api/tmdb-api';
@@ -7,7 +7,7 @@ import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';
 import { AuthContext } from "../contexts/authContext";
 import { MoviesContext } from "../contexts/moviesContext";
 
-const HomePage = (props) => {
+const SearchPage = (props) => {
   const context = useContext(AuthContext);
   const movieContext = useContext(MoviesContext);
   const page = movieContext.homePageNo;
@@ -21,7 +21,6 @@ const HomePage = (props) => {
     const res = movieContext.returnFavoriteList(context.currentUser.listId);
   }
 
-  
   if (isLoading) {
     return <Spinner />
   }
@@ -37,7 +36,7 @@ const HomePage = (props) => {
 
   return (
     <PageTemplate
-      title="Discover Movies"
+      title="Search Movies"
       movies={movies}
       action={(movie) => {
         return <AddToFavoritesIcon movie={movie} />
@@ -47,4 +46,4 @@ const HomePage = (props) => {
   );
 };
 
-export default HomePage;
+export default SearchPage;
