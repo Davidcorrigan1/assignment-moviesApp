@@ -5,14 +5,12 @@ import Spinner from '../components/spinner'
 import { getUpcomingMoviesPage } from "../api/tmdb-api";
 import AddToWatchListIcon from '../components/cardIcons/addToWatchList';
 import { MoviesContext } from "../contexts/moviesContext";
-import { TrainRounded } from "@material-ui/icons";
 
 const UpcomingMoviesPage = (props) => {
   const movieContext = useContext(MoviesContext);
   const page = movieContext.homePageNo;
   const pagination = true;
 
-  //const {  data, error, isLoading, isError }  = useQuery(['discover', {page}], getMoviesPage)
   const {  data, error, isLoading, isError }  = useQuery(['upcoming', {page}], getUpcomingMoviesPage)
 
   if (isLoading) {
