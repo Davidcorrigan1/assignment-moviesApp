@@ -16,7 +16,6 @@
   //--------------------------------------------------------------------------------------------
   export const getMoviesPage = async ( args) => {
     const [, { page }] = args.queryKey;
-    console.log("API: " + page);
     const response = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
     );
@@ -30,10 +29,7 @@
   // returns as array of movies in json format for page requested based on query
   //--------------------------------------------------------------------------------------------
   export const getMoviesPageQuery = async ( args) => {
-    console.log(args.queryKey);
     const [, { page, searchQuery }] = args.queryKey;
-    console.log("API: " + page);
-    console.log(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}${searchQuery}&language=en-US&include_adult=false&include_video=false&page=${page}`)
     const response = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}${searchQuery}&language=en-US&include_adult=false&include_video=false&page=${page}`
     );
@@ -47,7 +43,6 @@
   // Returns the movie details based on a movie id.
   //--------------------------------------------------------------------------------------------
   export const getMovie = async ( args ) => {
-    console.log(args)
     // eslint-disable-next-line no-unused-vars
     const [prefix, { id }] = args.queryKey;
     const response = await fetch(
@@ -63,7 +58,6 @@
    // Returns the person details based on a person id.
    //--------------------------------------------------------------------------------------------
    export const getPerson = async ( args ) => {
-    console.log(args)
     // eslint-disable-next-line no-unused-vars
     const [prefix, { id }] = args.queryKey;
     const response = await fetch(
@@ -100,7 +94,6 @@
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&with_people=${id}`
     );
     if (!response.ok) {
-      console.log("hello Error");
       throw new Error(response.json().message);
     }
     return response.json();
@@ -228,8 +221,7 @@
       "password": process.env.REACT_APP_TMDB_PASSWORD,
       "request_token": requestToken,
     };
-    console.log(data);
-
+    
     const requestOption = {
       method: 'POST',
       headers: {  'Content-Type': 'application/json',

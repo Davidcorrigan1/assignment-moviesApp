@@ -34,17 +34,18 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
       <AuthProvider>
+      <MoviesContextProvider>
         <SiteHeader />      {/* New Header  */}
-          <MoviesContextProvider>
+          
             {" "}
             <Switch>
               <Route exact path="/reviews/form" component={AddMovieReviewPage} />
               <PrivateRoute exact path="/movies/upcoming" component={UpcomingMoviesPage} />
-              <Route path="/reviews/:id" component={MovieReviewPage} />
+              <PrivateRoute path="/reviews/:id" component={MovieReviewPage} />
               <PrivateRoute path="/movies/favorites" component={FavoriteMoviesPage} />
               <PrivateRoute exact path="/movies/watched" component={WatchedMoviesPage} />
-              <Route path="/movies/:id" component={MoviePage} />
-              <Route path="/appearedInmovies/:id" component={AppearedInMoviesPage} />
+              <PrivateRoute path="/movies/:id" component={MoviePage} />
+              <PrivateRoute path="/appearedInmovies/:id" component={AppearedInMoviesPage} />
               <PrivateRoute exact path="/search" component={SearchPage} />
               <Route path="/signup" component={SignupPage} />
               <Route path="/signin" component={SigninPage} />

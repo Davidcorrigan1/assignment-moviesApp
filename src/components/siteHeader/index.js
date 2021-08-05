@@ -14,7 +14,8 @@ import { withRouter } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { AuthContext } from "../../contexts/authContext";
-import { auth } from "../../database/firebase";
+import { MoviesContext } from "../../contexts/moviesContext";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +32,7 @@ const SiteHeader = ( { history }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const context = useContext(AuthContext);
+  const moviesContext = useContext(MoviesContext);
 
   const menuOptions = [
     { label: "Home", path: "/" },
@@ -45,8 +47,8 @@ const SiteHeader = ( { history }) => {
 
   const handleMenuSelect = async (pageURL) => {
     if (pageURL === "/signout") {
-      await auth.signOut();
       context.signout();
+      await moviesContext.resetFavorites();
       pageURL = "/"
     }
     history.push(pageURL);

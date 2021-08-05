@@ -60,6 +60,11 @@ const MoviesContextProvider = (props) => {
     ) )
   };
 
+  // Function to remove a movie from the mustWatch state variable array
+  const resetFavorites = () => {
+    setFavorites([]);
+  };
+
   // Function to set home page number
   const setHomePageNumber = (page) => {
     setHomePageNo(page);
@@ -77,7 +82,8 @@ const MoviesContextProvider = (props) => {
         addToMustWatch,
         removeFromMustWatch,
         returnFavoriteList,
-        setHomePageNumber
+        setHomePageNumber,
+        resetFavorites
       }}
     >
       {props.children}
