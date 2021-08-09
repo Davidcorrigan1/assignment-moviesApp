@@ -51,8 +51,8 @@ function MovieListPageTemplate({ movies, title, action, pagination }) {
       </Grid>
        
       <Grid  className={classes.marginAutoItem}>
-        {(pagination) ?  
-        <PaginationCard/> : <></>}
+        {(pagination > 0) ?  
+        <PaginationCard page={pagination} /> : <></>}
       </Grid> 
     </Grid>
   );

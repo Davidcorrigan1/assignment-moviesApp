@@ -56,14 +56,9 @@ const SearchHeader = (props) => {
   }
 
   const genres = genreData.genres;
-  if (genres[0].name!=='All') {
-    genres.unshift({ id: "0", name: "All" });
-  }
 
-  const {"GB" :certifications} = certData.certifications;
-  if (certifications[0].certification!=='All') {
-    certifications.unshift({ id: "0", certification: "All" });
-  }
+  const {"GB" :cert_results} = certData.certifications;
+  const certifications = cert_results.filter(cert => cert.certification !== "R18");
 
   const generateArrayOfYears = (number) => {
       const max = new Date().getFullYear();

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PaginationCard() {
+export default function PaginationCard({page}) {
 
   const classes = useStyles();
   const movieContext = useContext(MoviesContext);
@@ -27,7 +27,7 @@ export default function PaginationCard() {
   return (
     <div className={classes.root}>
       <Typography component="h1" variant="h4">Page: {movieContext.homePageNo}</Typography>
-      <Pagination count={20} page={movieContext.homePageNo} onChange={handleChange} />
+      <Pagination count={page} page={movieContext.homePageNo} onChange={handleChange} />
     </div>
   );
 }

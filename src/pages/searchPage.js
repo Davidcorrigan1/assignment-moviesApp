@@ -11,7 +11,7 @@ const SearchPage = (props) => {
   const context = useContext(AuthContext);
   const movieContext = useContext(MoviesContext);
   const page = movieContext.homePageNo;
-  const pagination = true;
+  let pagination = 0;
   const [genres, setGenres] = useState('');
   const [certificates, setCertificates] = useState('');
   const [years, setYears] = useState('');
@@ -21,7 +21,6 @@ const SearchPage = (props) => {
   
 
   const handleChange = (type, value) => {
-    console.log("handleChange");
     if (type === "genre") 
         setGenres(value);
     else if (type === "year")
@@ -31,20 +30,19 @@ const SearchPage = (props) => {
   };
 
   const handleSearchButton = () => {
-      console.log("handleSearchButton");
       let certCountry = "";
       let withGenre = ""
       let inYears = "";
       let withCerts = "";
       if (genres !== "") {
-        certCountry = "&certification_country=GB";
         withGenre = "&with_genres=".concat(genres);
       }
       if (years !== "") {
           inYears = "&primary_release_year=".concat(years);
       }
       if (certificates !== "") {
-          withCerts = "&certification=".concat(certificates);
+          certCountry = "&certification_country=GB";
+          withCerts = "&certification=".concat(certificates).concat(certCountry);
       }
 
       const queryParameter = certCountry.concat(withGenre).concat(inYears).concat(withCerts);
@@ -52,10 +50,6 @@ const SearchPage = (props) => {
       setSearchQuery(queryParameter);
 
   }
-
-  console.log("searchQuery");
-  console.log(searchQuery);
-  
 
   // This will trigger the moviesContext favorite array to be populated from the Users list of Favorites in TMDB
   if (context.currentUser.listId) {
@@ -70,6 +64,7 @@ const SearchPage = (props) => {
     return <h1>{error.message}</h1>
   }  
   const movies = data.results;
+  pagination = data.total_results;
 
   // Redundant, but necessary to avoid app crashing.
   const favorites = movies.filter(m => m.favorite)

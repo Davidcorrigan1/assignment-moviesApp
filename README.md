@@ -6,8 +6,12 @@ Name: David Corrigan
 
 The objective of my assignment are the following extentions to the MovieApp
 
-+ Adding Authentication using Firebase Auth
-+ Adding Firebase storage for user data, like TMDB List number and username
++ A new SignUp and SignIn pages for the user
++ A new MUST-WATCH page for movies added to must watch list in the Upcoming Movies page
++ A new Search page which allows the user to search by Genre, Release Year and/or Certification
++ Setting All routes except the Homepage as Private, requiring authentication.
++ Adding Authentication using Firebase Auth functionality
++ Adding Firebase storage for user data, like TMDB List id and username
 + Using the List functionality in the TMDB api to store favorites for a logged in user.
 + Pagination on the Homepage and the Upcoming Movies Page
 
@@ -41,7 +45,7 @@ Additional API TMDB Endpoints Used with sample results:
 
 
     + Sample Result:
-    
+
     ```json
 
     {
@@ -67,7 +71,9 @@ Additional API TMDB Endpoints Used with sample results:
         video: false,
         vote_average: 8.2,
         vote_count: 1203
-        },]
+        },],
+    total_pages: 3,
+    total_results: 54
     }
     ```
 

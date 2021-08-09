@@ -33,17 +33,30 @@ const SiteHeader = ( { history }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const context = useContext(AuthContext);
   const moviesContext = useContext(MoviesContext);
-
-  const menuOptions = [
-    { label: "Home", path: "/" },
-    { label: "Upcoming", path: "/movies/upcoming"},
-    { label: "Favorites", path: "/movies/favorites" },
-    { label: "Must-Watch", path: "/movies/watched" },
-    { label: "Search", path: "/search" },
-    { label: "Sign-In", path: "/signin" },
-    { label: "Sign-Up", path: "/signup" },
-    { label: "Sign-Out", path: "/signout" },
-  ];
+  let menuOptions = [];
+  
+  if (context.isAuthenticated) {
+    menuOptions = [
+      { label: "Home", path: "/" },
+      { label: "Upcoming", path: "/movies/upcoming"},
+      { label: "Favorites", path: "/movies/favorites" },
+      { label: "Must-Watch", path: "/movies/watched" },
+      { label: "Search", path: "/search" },
+      { label: "Sign-Out", path: "/signout" },
+    ];
+  } else {
+    menuOptions = [
+      { label: "Home", path: "/" },
+      { label: "Upcoming", path: "/movies/upcoming"},
+      { label: "Favorites", path: "/movies/favorites" },
+      { label: "Must-Watch", path: "/movies/watched" },
+      { label: "Search", path: "/search" },
+      { label: "Sign-In", path: "/signin" },
+      { label: "Sign-Up", path: "/signup" },
+      { label: "Sign-Out", path: "/signout" },
+    ];
+  }
+  
 
   const handleMenuSelect = async (pageURL) => {
     if (pageURL === "/signout") {

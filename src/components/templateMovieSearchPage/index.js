@@ -38,8 +38,8 @@ function MovieSearchPageTemplate({ movies, title, action, pagination, handleChan
       </Grid>
        
       <Grid  className={classes.marginAutoItem}>
-        {(pagination) ?  
-        <PaginationCard/> : <></>}
+        {(pagination > 0) ?  
+        <PaginationCard page={pagination} /> : <></>}
       </Grid> 
     </Grid>
   );
