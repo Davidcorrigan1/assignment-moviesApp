@@ -6,7 +6,8 @@ export const AuthContext = createContext(null);
 
 const AuthContextProvider = (props) => {
 
-  const [currentUser, setCurrentUser] = useState({listId: null, sessionId: null, authDisplayName: null, authEmail: null});
+  const [currentUser, setCurrentUser] = useState({listId: null, mustWatchId: null, sessionId: null, authDisplayName: null, authEmail: null});
+  const [refreshLists, setRefreshLists] = useState(false);
 
   //-----------------------------------------------------------------------------------------
   // Authenticate an existing user with Firebase Auth
@@ -26,7 +27,8 @@ const AuthContextProvider = (props) => {
     await authenticateWithLogin(jsonResult.request_token);
     const sessionResult = await createSessionId(jsonResult.request_token);  
 
-    setCurrentUser({listId: document.list_id, sessionId: sessionResult.session_id, authDisplayName: document.displayName, authEmail: email });
+    setCurrentUser({listId: document.list_id, mustWatchId: document.mustWatch_id, sessionId: sessionResult.session_id, authDisplayName: document.displayName, authEmail: email });
+    setRefreshLists(true);
 
   };
 
@@ -51,12 +53,14 @@ const AuthContextProvider = (props) => {
     await authenticateWithLogin(jsonResult.request_token);
     const sessionResult = await createSessionId(jsonResult.request_token);  
     
-    const results = await createNewList(sessionResult.session_id, "favorite", "Favorites Description");
+    const favoriteResults = await createNewList(sessionResult.session_id, "favorite", "Favorites Description");
+    const mustWatchResults = await createNewList(sessionResult.session_id, "mustWatch", "Must Watch Description");
 
     const {user} = await auth.createUserWithEmailAndPassword(email, password);
-    await generateUserDocument(user, {displayName, list_id: results.list_id});
+    await generateUserDocument(user, {displayName, list_id: favoriteResults.list_id, mustWatch_id: mustWatchResults.list_id});
 
-    setCurrentUser({listId: results.list_id, sessionId: sessionResult.session_id, authDisplayName: displayName, authEmail: email });
+    setCurrentUser({listId: favoriteResults.list_id, mustWatchId: mustWatchResults.list_id, sessionId: sessionResult.session_id, authDisplayName: displayName, authEmail: email});
+    setRefreshLists(true);
 
   };
 
@@ -66,7 +70,8 @@ const AuthContextProvider = (props) => {
   const signout = async () => {
     await auth.signOut();
     setTimeout(() => {
-        setCurrentUser( { listId: null, sessionId: null, authDisplayName: null, authEmail: null});}
+        setCurrentUser( { listId: null, mustWatchId: null, sessionId: null, authDisplayName: null, authEmail: null});
+        setRefreshLists(false);}
         , 100);
   };
 
@@ -78,7 +83,9 @@ const AuthContextProvider = (props) => {
         authenticate,
         signout,
         signup,
+        refreshLists,
         currentUser,
+        setRefreshLists
       }}
     >
       {props.children}

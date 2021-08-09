@@ -36,7 +36,6 @@ const App = () => {
       <AuthProvider>
       <MoviesContextProvider>
         <SiteHeader />      {/* New Header  */}
-          
             {" "}
             <Switch>
               <Route exact path="/reviews/form" component={AddMovieReviewPage} />

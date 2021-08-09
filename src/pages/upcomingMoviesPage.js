@@ -1,15 +1,32 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner'
 import { getUpcomingMoviesPage } from "../api/tmdb-api";
 import AddToWatchListIcon from '../components/cardIcons/addToWatchList';
 import { MoviesContext } from "../contexts/moviesContext";
+import { AuthContext } from "../contexts/authContext";
 
 const UpcomingMoviesPage = (props) => {
   const movieContext = useContext(MoviesContext);
+  const context = useContext(AuthContext);
   const page = movieContext.homePageNo;
   let pagination = 0;
+
+  // This will trigger the moviesContext favorite and mustWatch arrays to be populated from the Users list of Favorites in TMDB
+  useEffect(()=> {
+    async function refreshDataLists () {
+      if (context.currentUser.listId && context.currentUser.mustWatchId && context.refreshLists) {
+
+        await movieContext.refreshFavoriteList(context.currentUser.listId);
+        await movieContext.refreshMustWatchList(context.currentUser.mustWatchId);
+      }
+      context.setRefreshLists(false);
+    };
+
+    refreshDataLists ();
+
+  })
 
   const {  data, error, isLoading, isError }  = useQuery(['upcoming', {page}], getUpcomingMoviesPage)
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from 'react-query'
 import Spinner from '../components/spinner'
@@ -13,14 +13,24 @@ const HomePage = (props) => {
   const page = movieContext.homePageNo;
   let pagination = 0;
 
+  // This will trigger the moviesContext favorite and mustWatch arrays to be populated from the Users list of Favorites in TMDB
+
+  useEffect(()=> {
+    async function refreshDataLists () {
+      if (context.currentUser.listId && context.currentUser.mustWatchId && context.refreshLists) {
+
+        await movieContext.refreshFavoriteList(context.currentUser.listId);
+        await movieContext.refreshMustWatchList(context.currentUser.mustWatchId);
+      }
+      context.setRefreshLists(false);
+    };
+
+    refreshDataLists ();
+
+  })
+
   const {  data, error, isLoading, isError }  = useQuery(['discover', {page}], getMoviesPage)
-  
-  
-  // This will trigger the moviesContext favorite array to be populated from the Users list of Favorites in TMDB
-  if (context.currentUser.listId) {
-    movieContext.returnFavoriteList(context.currentUser.listId);
-  }
-  
+
   if (isLoading) {
     return <Spinner />
   }

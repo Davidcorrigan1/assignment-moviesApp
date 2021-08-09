@@ -4,7 +4,6 @@ import "firebase/firestore";
 
 
 const firebaseConfig = {
-    //apiKey: "AIzaSyAhJggGKujULZ_Vu9kfWR14fqHVrDUXEvA",
     apiKey: process.env.REACT_APP_API_KEY, 
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_PROJECT_ID,
@@ -25,6 +24,7 @@ export const signInWithGoogle = () => {
   auth.signInWithPopup(provider);
 };
 
+// Store the User Data on the Firestore Database
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
 
@@ -47,6 +47,7 @@ export const generateUserDocument = async (user, additionalData) => {
   return getUserDocument(user.uid);
 };
 
+// Retrieve the user data from the Firestore database
 export const getUserDocument = async uid => {
   if (!uid) return null;
   try {

@@ -62,6 +62,7 @@ const SiteHeader = ( { history }) => {
     if (pageURL === "/signout") {
       context.signout();
       await moviesContext.resetFavorites();
+      await moviesContext.resetMustWatch();
       pageURL = "/"
     }
     history.push(pageURL);

@@ -34,12 +34,12 @@ const MoviesContextProvider = (props) => {
   };
 
   // Returns a list of Favorites from the users list on TMDB
-  const returnFavoriteList = async (listId) => {
+  const refreshFavoriteList = async (listId) => {
     const result = await retrieveListArray(listId);
     const idArray = result.items.map(item => item.id)
     setFavorites(idArray);
 
-    return result; 
+    return idArray; 
   }
 
   const addReview = (movie, review) => {
@@ -47,22 +47,42 @@ const MoviesContextProvider = (props) => {
   };
 
   // Function to add movie to the mustWatch state variable array
-  const addToMustWatch = (movie) => {
-    if (!(mustWatch.includes(movie.id))) {
-      setMustWatch([...mustWatch,movie.id])
-    }
+  const addToMustWatch = async (movie) => {
+    const found = await checkListArray(context.currentUser.mustWatchId, movie.id )
+      console.log(found);
+      if (!found.item_present) {
+        await addToList(context.currentUser.sessionId, context.currentUser.mustWatchId, movie.id );
+        const result1 = await retrieveListArray(context.currentUser.mustWatchId);
+        const idArray = result1.items.map(item => item.id)
+        setMustWatch(idArray);
+      }
   };
 
   // Function to remove a movie from the mustWatch state variable array
-  const removeFromMustWatch = (movie) => {
-    setMustWatch( mustWatch.filter(
-      (mId) => mId !== movie.id
-    ) )
+  const removeFromMustWatch = async (movie) => {
+    await removeFromList(context.currentUser.sessionId, context.currentUser.mustWatchId, movie.id );
+    const result1 = await retrieveListArray(context.currentUser.mustWatchId);
+    const idArray = result1.items.map(item => item.id)
+    setMustWatch(idArray);
+  
   };
 
-  // Function to remove a movie from the mustWatch state variable array
+  // Returns a list of Must watch movies from the users list on TMDB
+  const refreshMustWatchList = async (listId) => {
+    const result = await retrieveListArray(listId);
+    const idArray = result.items.map(item => item.id)
+    setMustWatch(idArray);
+    return idArray; 
+  }
+
+  // Function to remove a movie from the Favorites state variable array
   const resetFavorites = () => {
     setFavorites([]);
+  };
+
+  // Function to remove a movie from the mustWatch state variable array
+  const resetMustWatch = () => {
+    setMustWatch([]);
   };
 
   // Function to set home page number
@@ -81,9 +101,11 @@ const MoviesContextProvider = (props) => {
         mustWatch,
         addToMustWatch,
         removeFromMustWatch,
-        returnFavoriteList,
+        refreshFavoriteList,
+        refreshMustWatchList,
         setHomePageNumber,
-        resetFavorites
+        resetFavorites,
+        resetMustWatch
       }}
     >
       {props.children}
