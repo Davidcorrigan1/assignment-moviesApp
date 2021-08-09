@@ -35,10 +35,43 @@ The objective of my assignment are the following extentions to the MovieApp
 
 Additional API TMDB Endpoints Used with sample results:
 
-+ https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}${searchQuery}&language=en-US&include_adult=false&include_video=false&page=${page}`
++ API Endpoint for search Query (where searchQuery = "&certification_country=GB&with_genres=28&primary_release_year=2021&certification=15" for example): 
+
+    + https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}${searchQuery}&language=en-US&include_adult=false&include_video=false&page=${page}`
 
 
-    + jbajsbfjasf
+    + Sample Result:
+    
+    ```json
+
+    {
+        page: 1,
+        results: [
+        {
+        adult: false,
+        backdrop_path: "/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg",
+        genre_ids: [
+        28,
+        12,
+        35,
+        878
+        ],
+        id: 436969,
+        original_language: "en",
+        original_title: "The Suicide Squad",
+        overview: "Supervillains Harley Quinn, Bloodsport, Peacemaker and a collection of nutty cons at Belle Reve prison join the super-secret, super-shady Task Force X as they are dropped off at the remote, enemy-infused island of Corto Maltese.",
+        popularity: 4168.234,
+        poster_path: "/kb4s0ML0iVZlG6wAKbbs9NAm6X.jpg",
+        release_date: "2021-07-28",
+        title: "The Suicide Squad",
+        video: false,
+        vote_average: 8.2,
+        vote_count: 1203
+        },]
+    }
+    ```
+
+
 
 
 ## App Design.

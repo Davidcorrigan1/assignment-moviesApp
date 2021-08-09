@@ -30,6 +30,7 @@
   //--------------------------------------------------------------------------------------------
   export const getMoviesPageQuery = async ( args) => {
     const [, { page, searchQuery }] = args.queryKey;
+    console.log(searchQuery);
     const response = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}${searchQuery}&language=en-US&include_adult=false&include_video=false&page=${page}`
     );
