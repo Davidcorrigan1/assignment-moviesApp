@@ -6,14 +6,15 @@ Name: David Corrigan
 
 The objective of my assignment are the following extentions to the MovieApp
 
-+ A new SignUp and SignIn pages for the user
-+ A new MUST-WATCH page for movies added to must watch list in the Upcoming Movies page
++ A new SignUp and SignIn pages for the user, plus a signout option
++ A new MUST-WATCH page for movies added to a must watch list in the Upcoming Movies page
 + A new Search page which allows the user to search by Genre, Release Year and/or Certification
-+ Setting All routes except the Homepage as Private, requiring authentication.
++ Setting All routes except the Homepage as Private, requiring authentication including favorite icon.
 + Adding Authentication using Firebase Auth functionality
-+ Adding Firebase storage for user data, like TMDB List id and username
-+ Using the List functionality in the TMDB api to store favorites for a logged in user.
-+ Pagination on the Homepage and the Upcoming Movies Page
++ Adding Firebase storage for user data, like TMDB favorite/must-watch List id and username
++ Using the List functionality in the TMDB api to store favorite and must-watch movies for a logged in user.
++ Pagination on the Homepage, the Upcoming Movies Page and search page
++ Caching of most API calls, including the variable query api call.
 
 
 
@@ -30,12 +31,13 @@ The objective of my assignment are the following extentions to the MovieApp
     + REACT_APP_APP_ID=...
     + REACT_APP_MEASUREMENT_ID=...
 
-+ A login to TMDB is required
++ A login to TMDB is required (incuding api key):
+    + REACT_APP_TMDB_KEY=...
     + REACT_APP_TMDB_USERNAME=...
     + REACT_APP_TMDB_PASSWORD=...  
 
-## API Data Model.
 
+## API Data Model.
 
 Additional API TMDB Endpoints Used with sample results:
 
@@ -92,23 +94,37 @@ Additional API TMDB Endpoints Used with sample results:
 
 ...... Insert screenshots of the app's views, with appropriate captions (see example below). (For the Movies Fan App, only show the new/modified views) ........
 
+
+
 ![][view]
 >Shows detailed information on a movie. Clicking the 'Reviews' floating action button will display extracts from critic reviews.
+
 
 ### Routing.
 
 ...... Insert a list of the routes supported by your app and state the associated view. If relevant, specify which of the routes require authentication, i.e. protected/private. [For the Movies Fan app, only new routes should be listed.] ......... 
 
-+ GET /blogs - displays all published blogs.
-+ POST /blogs (protected) - add a new blog.
-+ GET /blogs/:id - displays a particular blog.
-+ GET /blogs/:id/comments (protected) - detail view of a particular blog and its comments.
-+ etc.
-+ etc.
++ GET   /movies/watched       (protected) - displays must watch movies.
++ GET   /appearedInmovies/:id (protected) - displays movies person appeared in
++ POST  /signup                           - allows a user to sign up to site.
++ POST  /signin                           - allows a registered user to sign in to site
++ GET   /search               (protected) - allows a user to search by specfic criteria
+
 
 ## Independent learning (If relevant).
 
 ....... Briefly state any technologies/techniques used in your project codebase that was not covered in the lectures/labs. Provide source code filename (source code excerpts are not required in most cases) references to support your assertions and include references (articles/blogs) ......... 
++ Firebase Auth
+
+
++ Firebase Database
+
+
++ TMDB Lists to Support CRUD
+
+
++ Pagination in Material UI and React##
+
 
 
 [model]: ./data.jpg
