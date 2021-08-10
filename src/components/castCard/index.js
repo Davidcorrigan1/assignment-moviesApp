@@ -4,8 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Button from "@material-ui/core/Button";
-
-import img from '../../images/film-poster-placeholder.png';
+import img from '../../images/profile.jpg';
 
 
 const useStyles = makeStyles({
@@ -16,6 +15,9 @@ const useStyles = makeStyles({
     overflow: 'hidden',
     width: "50%"
   },
+
+  media: { height: 500,
+           maxWidth: 345  },
 
   titleBar: {
     background:
@@ -32,8 +34,9 @@ export default function CastCard({ cast, action }) {
   const classes = useStyles();
 
   return (
-    <GridListTile key={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}>
-            <img src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`} alt={img} />
+    <GridListTile className={classes.media} key={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}>
+            <img src={cast.profile_path ? `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
+            : img} />
             <GridListTileBar
               title={cast.name}
               subtitle={cast.character}

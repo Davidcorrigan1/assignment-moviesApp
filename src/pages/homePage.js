@@ -14,7 +14,6 @@ const HomePage = (props) => {
   let pagination = 0;
 
   // This will trigger the moviesContext favorite and mustWatch arrays to be populated from the Users list of Favorites in TMDB
-
   useEffect(()=> {
     async function refreshDataLists () {
       if (context.currentUser.listId && context.currentUser.mustWatchId && context.refreshLists) {
