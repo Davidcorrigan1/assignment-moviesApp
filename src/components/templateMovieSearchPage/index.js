@@ -3,7 +3,7 @@ import Header from "../headerMovieList";
 import SearchCard from "../searchHeader";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import MovieList from "../movieList";
+import MovieListSearch from "../movieListSearch";
 import PaginationCard from "../paginationCard";
 
 const useStyles = makeStyles({
@@ -34,7 +34,7 @@ function MovieSearchPageTemplate({ movies, title, action, pagination, handleChan
       </Grid>
       <Grid item container spacing={6} className={classes.root}>
       <Grid item xs={12}></Grid>
-        <MovieList action={action} movies={movies}></MovieList>
+        <MovieListSearch action={action} movies={movies}></MovieListSearch>
       </Grid>
        
       <Grid  className={classes.marginAutoItem}>

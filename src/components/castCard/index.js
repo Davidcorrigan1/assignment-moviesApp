@@ -36,7 +36,7 @@ export default function CastCard({ cast, action }) {
   return (
     <GridListTile className={classes.media} key={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}>
             <img src={cast.profile_path ? `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
-            : img} />
+            : img} alt={img} />
             <GridListTileBar
               title={cast.name}
               subtitle={cast.character}
