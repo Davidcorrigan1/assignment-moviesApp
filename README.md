@@ -110,7 +110,7 @@ This section will show new or updated application pages with a caption of the ne
 
 #### Appeared In Page
 
->The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
+>This is a new page which will display the movies for a specific actor appeared in. This is based on which cast member the 'Movies' button was pressed in the movies detail page.
 
 ![][AppearedInPage]
 
@@ -124,7 +124,15 @@ This section will show new or updated application pages with a caption of the ne
 
 ![][MustWatchPage]
 
+#### Sign Up Page
+>This is a new page which allows the user to sign up as a register user of the site which will give them access to more pages and functionality.
 
+![][SignUpPage]
+
+#### Sign In Page
+>This is a new page that allows a registered user to sign in to the site which will give them access to more pages and functionality.
+
+![][SignInPage]
 
 ### Routing.
 
@@ -156,13 +164,14 @@ This section will show new or updated application pages with a caption of the ne
 [model]: ./images/data.jpg
 [view]: ./images/view.png
 [stories]: ./images/storybook.png
-[HomePage]: ./images/HomePage.PNG
 [MovieDetailPage]: ./images/MovieDetailPage.PNG
 [MustWatchPage]: ./images/MustWatchPage.PNG
 [SearchPage]: ./images/SearchPage.PNG
 [SignInPage]: ./images/SignInPage.PNG
 [SignUpPage]: ./images/SignUpPage.PNG
 [AppearedInPage]: ./images/AppearedInPage.PNG
+[HomePage]: ./images/HomePage.PNG
+
 
 
 
