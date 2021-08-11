@@ -94,13 +94,15 @@ Additional API TMDB Endpoints Used with sample results:
 
 This section will show new or updated application pages with a caption of the new functionality or change made to the page
 
-
+#### Home Page.
 ![][HomePage]
 >The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
 
+#### Movie Detail Page
 ![][MovieDetailPage]
 >The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
 
+#### Appeared In Page
 ![][AppearedInPage]
 >The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
 
