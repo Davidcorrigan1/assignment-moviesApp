@@ -126,8 +126,8 @@ This section will show new or updated application pages with a caption of the ne
 
 
 
-[model]: ../images/data.jpg
-[view]: ../images/view.png
-[stories]: ../images/storybook.png
-[HomePage]: ../images/homepage.PNG
+[model]: ./images/data.jpg
+[view]: ./images/view.png
+[stories]: ./images/storybook.png
+[HomePage]: ./images/homepage.PNG
 
