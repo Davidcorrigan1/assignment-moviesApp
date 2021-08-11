@@ -130,5 +130,5 @@ Additional API TMDB Endpoints Used with sample results:
 [model]: ./data.jpg
 [view]: ./view.png
 [stories]: ./storybook.png
-[HomePage]: ./homePage.PNG
+[HomePage]: ./homepage.PNG
 
