@@ -162,14 +162,14 @@ The Home page now has additional options in the header, with options to SignUp, 
 
 [model]: ./images/data.jpg
 [view]: ./images/view.png
-[stories]: ./images/storybook.png
+[stories]: ./images/storybook.PNG
+[TheHomePage]: ./images/HomePage.PNG
 [MovieDetailPage]: ./images/MovieDetailPage.PNG
 [MustWatchPage]: ./images/MustWatchPage.PNG
 [SearchPage]: ./images/SearchPage.PNG
 [SignInPage]: ./images/SignInPage.PNG
 [SignUpPage]: ./images/SignUpPage.PNG
 [AppearedInPage]: ./images/AppearedInPage.PNG
-[TheHomePage]: ./images/HomePage.PNG
 
 
 
