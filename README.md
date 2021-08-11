@@ -92,8 +92,7 @@ Additional API TMDB Endpoints Used with sample results:
 
 ### UI Design.
 
-...... Insert screenshots of the app's views, with appropriate captions (see example below). (For the Movies Fan App, only show the new/modified views) ........
-
+This section will show new or updated application pages with a caption of the new functionality or change made to the page
 
 
 ![][HomePage]
@@ -127,8 +126,8 @@ Additional API TMDB Endpoints Used with sample results:
 
 
 
-[model]: ./data.jpg
-[view]: ./view.png
-[stories]: ./storybook.png
-[HomePage]: ./homepage.PNG
+[model]: ../images/data.jpg
+[view]: ../images/view.png
+[stories]: ../images/storybook.png
+[HomePage]: ../images/homepage.PNG
 
