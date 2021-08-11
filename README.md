@@ -98,6 +98,12 @@ This section will show new or updated application pages with a caption of the ne
 ![][HomePage]
 >The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
 
+![][MovieDetailPage]
+>The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
+
+![][ApearedInPage]
+>The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
+
 
 ### Routing.
 
@@ -129,5 +135,14 @@ This section will show new or updated application pages with a caption of the ne
 [model]: ./images/data.jpg
 [view]: ./images/view.png
 [stories]: ./images/storybook.png
-[HomePage]: ./images/homepage.PNG
+[HomePage]: ./images/HomePage.PNG
+[MovieDetailPage]: ./images/MovieDetailPage.PNG
+[MustWatchPage]: ./images/MustWatchPage.PNG
+[SearchPage]: ./images/SearchPage.PNG
+[SignInPage]: ./images/SignInPage.PNG
+[SignUpPage]: ./images/SignUpPage.PNG
+[AppearedInPage]: ./images/AppearedInPage.PNG
+
+
+
 

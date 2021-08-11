@@ -5,7 +5,6 @@ import PageTemplate from "../components/templateMoviePage";
 import { getMovie, getMovieCast } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
-import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
 import CastList from "../components/castList";
 
 const MovieDetailsPage = (props) => {
@@ -40,7 +39,6 @@ const MovieDetailsPage = (props) => {
             <MovieDetails movie={movie} />
             <CastList
               castMembers={castList.cast}
-              action={(c) => <AddToFavoritesIcon movie={c} />}
             /> 
           </PageTemplate>
         </>

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     
   }));
 
-const CastList = ( {castMembers, action }) => {
+const CastList = ( {castMembers }) => {
     const classes = useStyles();
   
         return (
@@ -28,7 +28,7 @@ const CastList = ( {castMembers, action }) => {
                 <div className={classes.root}>
                 <GridList className={classes.gridList} >
                     {castMembers.map((c) => (
-                        <CastCard key={c.id} cast={c} action={action} />
+                        <CastCard key={c.id} cast={c}  />
                     ))}
                 </GridList>
                 </div>

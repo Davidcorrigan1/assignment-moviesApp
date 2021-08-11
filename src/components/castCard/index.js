@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CastCard({ cast, action }) {
+export default function CastCard({ cast }) {
   const classes = useStyles();
 
   return (
