@@ -151,7 +151,36 @@ This section will show new or updated application pages with a caption of the ne
 ## Independent learning (If relevant).
 
 ....... Briefly state any technologies/techniques used in your project codebase that was not covered in the lectures/labs. Provide source code filename (source code excerpts are not required in most cases) references to support your assertions and include references (articles/blogs) ......... 
-+ Firebase Auth
++ Firebase Authentication and Database
+I used Firebase for both authentication of users and for storage of user data.
+This required a new project to be set up for the application in the Firebase console.
+
+I referenced this blog to work my way through the implementation: https://blog.logrocket.com/user-authentication-firebase-react-apps/
+
+
+    + ../src/database/firebase.js
+
+        + Methods Defined
+            + generateUserDocument
+            + getUserDocument
+
+    + ../src/contexts/authContexts.js
+
+        + Method Defined
+            + authenticate() calls the following:
+                + auth.signInWithEmailAndPassword: Authenicated the email and password with firebase auth
+                + getUserDocument: retrieves user data from Firebase database for user
+                + requestUserToken: request a User Token from TMDB using API key
+                + authenticateWithLogin: Authenticate with user and password for TMSDB
+                + createSessionId: Create TMDB session id which is required to add and remove from TMDB list
+            + signup() calls the following:
+                + requestUserToken: Request token with TMDB API key
+                + authenticateWithLogin: Authenticates token with user and password for TMDB
+                + createSessionId : Create TMDB session id with authenicated token 
+                + createNewList: Create new list for both favorites and mustWatch and get ids.
+                + auth.createUserWithEmailAndPassword: Create an authenication record on Firebase 
+                + generateUserDocument: Store the user name and list ids on Firebase database for next login.
+                
 
 
 + Firebase Database
@@ -162,8 +191,6 @@ This section will show new or updated application pages with a caption of the ne
 
 + Pagination in Material UI and React##
 
-
-[view]: ./images/view.png
 [stories]: ./images/storybook.PNG
 [TheHomePage]: ./images/HomePage.PNG
 [MovieDetailPage]: ./images/MovieDetailPage.PNG
