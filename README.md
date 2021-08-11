@@ -96,8 +96,8 @@ Additional API TMDB Endpoints Used with sample results:
 
 
 
-![][view]
->Shows detailed information on a movie. Clicking the 'Reviews' floating action button will display extracts from critic reviews.
+![][HomePage]
+>The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
 
 
 ### Routing.
@@ -130,3 +130,5 @@ Additional API TMDB Endpoints Used with sample results:
 [model]: ./data.jpg
 [view]: ./view.png
 [stories]: ./storybook.png
+[HomePage]: ./homePage.PNG
+
