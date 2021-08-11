@@ -95,16 +95,35 @@ Additional API TMDB Endpoints Used with sample results:
 This section will show new or updated application pages with a caption of the new functionality or change made to the page
 
 #### Home Page.
-![][HomePage]
+
 >The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
 
+![][HomePage]
+
+
 #### Movie Detail Page
-![][MovieDetailPage]
+
 >The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
 
+![][MovieDetailPage]
+
+
 #### Appeared In Page
-![][AppearedInPage]
+
 >The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
+
+![][AppearedInPage]
+
+#### Search Page
+>The search page is a new page which allows the user to make specific movie searches via the API based on 3 different dropdown lists. These are genre, release year and certification.
+
+![][SearchPage]
+
+#### Must Watch Page
+>This is a new page which displays the movies the user has add in the upcoming movies page to their watch list. 
+
+![][MustWatchPage]
+
 
 
 ### Routing.
