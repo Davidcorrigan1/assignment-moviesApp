@@ -165,7 +165,7 @@ This section will show new or updated application pages with a caption of the ne
 
 [view]: ./images/view.png
 [stories]: ./images/storybook.PNG
-[TheHomePage]: ./images/AppearedInPage.PNG
+[TheHomePage]: ./images/HomePage.PNG
 [MovieDetailPage]: ./images/MovieDetailPage.PNG
 [MustWatchPage]: ./images/MustWatchPage.PNG
 [SearchPage]: ./images/SearchPage.PNG
