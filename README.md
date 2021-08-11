@@ -95,9 +95,10 @@ Additional API TMDB Endpoints Used with sample results:
 This section will show new or updated application pages with a caption of the new functionality or change made to the page
 
 #### Home Page.
-The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
+>The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
 
 ![][TheHomePage]
+![][MovieDetailPage]
 
 
 #### Movie Detail Page.
@@ -114,21 +115,25 @@ The Home page now has additional options in the header, with options to SignUp, 
 ![][AppearedInPage]
 
 #### Search Page.
+
 >The search page is a new page which allows the user to make specific movie searches via the API based on 3 different dropdown lists. These are genre, release year and certification.
 
 ![][SearchPage]
 
 #### Must Watch Page.
+
 >This is a new page which displays the movies the user has add in the upcoming movies page to their watch list. 
 
 ![][MustWatchPage]
 
 #### Sign Up Page.
+
 >This is a new page which allows the user to sign up as a register user of the site which will give them access to more pages and functionality.
 
 ![][SignUpPage]
 
 #### Sign In Page.
+
 >This is a new page that allows a registered user to sign in to the site which will give them access to more pages and functionality.
 
 ![][SignInPage]
@@ -159,7 +164,6 @@ The Home page now has additional options in the header, with options to SignUp, 
 + Pagination in Material UI and React##
 
 
-[model]: ./images/data.jpg
 [view]: ./images/view.png
 [stories]: ./images/storybook.PNG
 [TheHomePage]: ./images/HomePage.PNG
@@ -169,6 +173,3 @@ The Home page now has additional options in the header, with options to SignUp, 
 [SignInPage]: ./images/SignInPage.PNG
 [SignUpPage]: ./images/SignUpPage.PNG
 [AppearedInPage]: ./images/AppearedInPage.PNG
-
-
-
