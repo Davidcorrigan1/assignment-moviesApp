@@ -101,7 +101,7 @@ This section will show new or updated application pages with a caption of the ne
 ![][MovieDetailPage]
 >The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
 
-![][ApearedInPage]
+![][AppearedInPage]
 >The movies detail page now has the cast members in a horizonal scrollable grid. Each cast picture has a MOVIES button which will link to movies with that cast member in them.
 
 
