@@ -149,47 +149,68 @@ This section will show new or updated application pages with a caption of the ne
 
 
 ## Independent learning (If relevant).
+The following outlines some of the independent learning which I undertook in order to implement the application.
 
-....... Briefly state any technologies/techniques used in your project codebase that was not covered in the lectures/labs. Provide source code filename (source code excerpts are not required in most cases) references to support your assertions and include references (articles/blogs) ......... 
-+ Firebase Authentication and Database
+#### Firebase Authentication and Database
 I used Firebase for both authentication of users and for storage of user data.
 This required a new project to be set up for the application in the Firebase console.
 
 I referenced this blog to work my way through the implementation: https://blog.logrocket.com/user-authentication-firebase-react-apps/
 
 
-    + ../src/database/firebase.js
++ /src/database/firebase.js
 
-        + Methods Defined
-            + generateUserDocument
-            + getUserDocument
+    + Methods Defined
+        + generateUserDocument: Used to save the users data to Firebase Database
+        + getUserDocument: Used to retrievr the users data to Firebase Database
 
-    + ../src/contexts/authContexts.js
++ /src/contexts/authContexts.js
 
-        + Method Defined
-            + authenticate() calls the following:
-                + auth.signInWithEmailAndPassword: Authenicated the email and password with firebase auth
-                + getUserDocument: retrieves user data from Firebase database for user
-                + requestUserToken: request a User Token from TMDB using API key
-                + authenticateWithLogin: Authenticate with user and password for TMSDB
-                + createSessionId: Create TMDB session id which is required to add and remove from TMDB list
-            + signup() calls the following:
-                + requestUserToken: Request token with TMDB API key
-                + authenticateWithLogin: Authenticates token with user and password for TMDB
-                + createSessionId : Create TMDB session id with authenicated token 
-                + createNewList: Create new list for both favorites and mustWatch and get ids.
-                + auth.createUserWithEmailAndPassword: Create an authenication record on Firebase 
-                + generateUserDocument: Store the user name and list ids on Firebase database for next login.
+    + Method Defined
+        + authenticate() calls the following:
+            + auth.signInWithEmailAndPassword: Authenicated the email and password with Firebase authentication
+            + getUserDocument: retrieves user data from Firebase database for user
+        
+        + signup() calls the following:
+            + auth.createUserWithEmailAndPassword: Create an authenication record on Firebase 
+            + generateUserDocument: Store the user name and list ids on Firebase database for next login.
                 
 
+#### TMDB Lists to Support CRUD
+This outlines the source code files and methods in them which I used to implement CRUD functionality using TMDB lists.
 
-+ Firebase Database
+This information was referenced here: 
+        https://developers.themoviedb.org/3/authentication/how-do-i-generate-a-session-id
+        https://developers.themoviedb.org/3/lists/v4-or-v3-lists
 
 
-+ TMDB Lists to Support CRUD
++ /src/api/tmdb-api.js
+
+    + Methods Defined
+        + requestUserToken: Requests a token from TMDB using API key
+        + authenticateWithLogin: Authenticate TMDB token using TMDB login details
+        + createSessionId: Create a session id using the authenticated token
+        + createNewList: Create new TMDB lists (used for favorites and must-watch lists)
+        + addToList: adds movie id to the specified list, favorite or must watch
+        + removeFromList: removes a movie id from a specified list
+        + retrieveListArray: retrieves the array list based on the list id
+
++ /src/contexts/authContexts.js
+
+    + Method Defined
+        + authenticate() calls the following:
+            + requestUserToken: Request a User Token from TMDB using API key
+            + authenticateWithLogin: Authenticate with user and password for TMDB
+            + createSessionId: Create TMDB session id which is required to add and remove from TMDB list
+        
+        + signup() calls the following:
+            + requestUserToken: Request token with TMDB API key
+            + authenticateWithLogin: Authenticates token with user and password for TMDB
+            + createSessionId : Create TMDB session id with authenicated token 
+            + createNewList: Create new list for both favorites and mustWatch and get ids.
 
 
-+ Pagination in Material UI and React##
+#### Pagination in Material UI and React##
 
 [stories]: ./images/storybook.PNG
 [TheHomePage]: ./images/HomePage.PNG
