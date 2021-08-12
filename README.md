@@ -4,17 +4,19 @@ Name: David Corrigan
 
 ## Overview.
 
-The objective of my assignment are the following extentions to the MovieApp
+The objective of my assignment are the following extentions to the MovieApp which will allow me to showcase the React and Material UI skills I have learned in the ICT2 module. 
 
 + A new SignUp and SignIn pages for the user, plus a signout option
 + A new MUST-WATCH page for movies added to a must watch list in the Upcoming Movies page
 + A new Search page which allows the user to search by Genre, Release Year and/or Certification
++ Update to the Movie Details page to now display a scrollable grid of cast members on the movie. Each cast card has a 'Movies' button which routes to a page of movies in which taht cast member appears.
++ Adding a new AppearIn Page which displays the movies a specific cast member appears in.
 + Setting All routes except the Homepage as Private, requiring authentication including favorite icon.
 + Adding Authentication using Firebase Auth functionality
 + Adding Firebase storage for user data, like TMDB favorite/must-watch List id and username
 + Using the List functionality in the TMDB api to store favorite and must-watch movies for a logged in user.
 + Pagination on the Homepage, the Upcoming Movies Page and search page
-+ Caching of most API calls, including the variable query api call.
++ Caching of most API calls, including the variable query API call for the search page.
 
 
 
@@ -43,7 +45,7 @@ Additional API TMDB Endpoints Used with sample results:
 
 + API Endpoint for search Query (where searchQuery = "&certification_country=GB&with_genres=28&primary_release_year=2021&certification=15" for example): 
 
-    + https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}${searchQuery}&language=en-US&include_adult=false&include_video=false&page=${page}`
+    + `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}${searchQuery}&language=en-US&include_adult=false&include_video=false&page=${page}`
 
 
     + Sample Result:
@@ -79,8 +81,174 @@ Additional API TMDB Endpoints Used with sample results:
     }
     ```
 
++ API Endpoint for retieving data on a person based on id: 
+
+    + `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
 
 
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
+
++ API Endpoint which returns the cast of a particular movie based on movie id: 
+
+    + `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+
+
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
++ API Endpoint which returns the movies a person is involved in based on person id: 
+
+    + `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&with_people=${id}`
+
+
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
++ API Endpoint which returns the possible certification per country: 
+
+    + `https://api.themoviedb.org/3/certification/movie/list?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+
+
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
++ API Endpoint which returns a request token from TMDB: 
+
+    + `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_TMDB_KEY}`
+
+
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
++ API Endpoint which authenticate a request token from TMDB: 
+
+    + `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${process.env.REACT_APP_TMDB_KEY}`
+
+    + The following data is required in the request body
+        + const data ={
+                        "username": process.env.REACT_APP_TMDB_USERNAME,
+                        "password": process.env.REACT_APP_TMDB_PASSWORD,
+                        "request_token": requestToken,
+                    };
+
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
++ API Endpoint which creates a session id from TMDB: 
+
+    +  `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_TMDB_KEY}`
+
+    + The following data is required in the request body
+        + const data = {"request_token": requestToken};
+                
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
+
++ API Endpoint which creates a TMDB List: 
+
+    +  `https://api.themoviedb.org/3/list?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`
+
+    + The following data is required in the request body
+        + const data = {"name": listName, "description": listDescription, "language": "en"};
+                
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
++ API Endpoint which adds a movie to an existing TMDB List: 
+
+    +  `https://api.themoviedb.org/3/list/${listId}/add_item?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`
+
+    + The following data is required in the request body
+        + const data = {"media_id": movieId};
+                
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
++ API Endpoint which removes a movie id from an existing TMDB List: 
+
+    +  `https://api.themoviedb.org/3/list/${listId}/remove_item?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${sessionId}`
+
+    + The following data is required in the request body
+        + const data = {"media_id": movieId};
+                
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
+
++ API Endpoint which retrieves an array of movies from an existing TMDB List: 
+
+    +  `https://api.themoviedb.org/3/list/${listId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+                
+    + Sample Result:
+
+    ```json
+
+    {
+
+    }
+    ```
 
 ## App Design.
 
@@ -180,8 +348,8 @@ I referenced this blog to work my way through the implementation: https://blog.l
 This outlines the source code files and methods in them which I used to implement CRUD functionality using TMDB lists.
 
 This information was referenced here: 
-        https://developers.themoviedb.org/3/authentication/how-do-i-generate-a-session-id
-        https://developers.themoviedb.org/3/lists/v4-or-v3-lists
+    + https://developers.themoviedb.org/3/authentication/how-do-i-generate-a-session-id
+    + https://developers.themoviedb.org/3/lists/v4-or-v3-lists
 
 
 + /src/api/tmdb-api.js
@@ -211,6 +379,15 @@ This information was referenced here:
 
 
 #### Pagination in Material UI and React##
+
+This outlines the source files which are involved in pagination on the Home Page, the Upcoming movies page and the search page.
+
+The information was references here:
+    + https://material-ui.com/components/pagination/
+    
+
++ /src/components/paginationCard/index.js
+
 
 [stories]: ./images/storybook.PNG
 [TheHomePage]: ./images/HomePage.PNG
