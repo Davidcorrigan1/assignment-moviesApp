@@ -261,16 +261,14 @@ Additional API TMDB Endpoints Used with sample results:
 
 ![][stories]
 
-### UI Design.
+### UI Design. 
 
 This section will show new or updated application pages with a caption of the new functionality or change made to the page
 
 #### Home Page.
 
 >The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
-<br></br>
-
-![][./images/HomePageBK.PNG]
+![][HomePageBK]
 
 #### Movie Detail Page.
 
@@ -396,7 +394,7 @@ The relevent source code is here:
 
 
 [stories]: ./images/storybook.PNG
-[HomePage]: ./images/HomePage.PNG
+[HomePageBK]: ./images/HomePageBK.PNG
 [MovieDetailPage]: ./images/MovieDetailPage.PNG
 [MustWatchPage]: ./images/MustWatchPage.PNG
 [SearchPage]: ./images/SearchPage.PNG
