@@ -16,6 +16,7 @@ The objective of my assignment are the following extentions to the MovieApp whic
 + Adding Firebase storage for user data, like TMDB favorite/must-watch List id and username
 + Using the List functionality in the TMDB api to store favorite and must-watch movies for a logged in user.
 + Pagination on the Homepage, the Upcoming Movies Page and search page
++ Using Query string in the API call for the Search page.
 + Caching of most API calls, including the variable query API call for the search page.
 
 
@@ -25,6 +26,7 @@ The objective of my assignment are the following extentions to the MovieApp whic
 ...... A brief explanation (to a third party) of any non-standard setup steps necessary to run your app/client locally (after cloning the repo) ........
 
 + A Firebase Project is required to be created. And the following details added to the .env
+
     + REACT_APP_API_KEY=.....
     + REACT_APP_AUTH_DOMAIN=....
     + REACT_APP_PROJECT_ID=....
@@ -34,6 +36,7 @@ The objective of my assignment are the following extentions to the MovieApp whic
     + REACT_APP_MEASUREMENT_ID=...
 
 + A login to TMDB is required (incuding api key):
+
     + REACT_APP_TMDB_KEY=...
     + REACT_APP_TMDB_USERNAME=...
     + REACT_APP_TMDB_PASSWORD=...  
@@ -265,7 +268,7 @@ This section will show new or updated application pages with a caption of the ne
 #### Home Page.
 >The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
 
-![][TheHomePage]
+![][HomePage]
 
 
 #### Movie Detail Page.
@@ -390,7 +393,7 @@ The information was references here:
 
 
 [stories]: ./images/storybook.PNG
-[TheHomePage]: ./images/HomePage.PNG
+[HomePage]: ./images/HomePage.PNG
 [MovieDetailPage]: ./images/MovieDetailPage.PNG
 [MustWatchPage]: ./images/MustWatchPage.PNG
 [SearchPage]: ./images/SearchPage.PNG
