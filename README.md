@@ -270,7 +270,7 @@ This section will show new or updated application pages with a caption of the ne
 >The Home page now has additional options in the header, with options to SignUp, SignIn and SignOut. And also a MUST-WATCH and SEARCH page.
 <br></br>
 
-![Home][./images/HomePage.PNG]
+![][./images/HomePageBK.PNG]
 
 #### Movie Detail Page.
 
