@@ -326,7 +326,8 @@ The following outlines some of the independent learning which I undertook in ord
 I used Firebase for both authentication of users and for storage of user data.
 This required a new project to be set up for the application in the Firebase console.
 
-I referenced this blog to work my way through the implementation: https://blog.logrocket.com/user-authentication-firebase-react-apps/
+I referenced this blog to work my way through the implementation: 
++ https://blog.logrocket.com/user-authentication-firebase-react-apps/
 
 
 + /src/database/firebase.js
@@ -351,8 +352,8 @@ I referenced this blog to work my way through the implementation: https://blog.l
 This outlines the source code files and methods in them which I used to implement CRUD functionality using TMDB lists.
 
 This information was referenced here: 
-    + https://developers.themoviedb.org/3/authentication/how-do-i-generate-a-session-id
-    + https://developers.themoviedb.org/3/lists/v4-or-v3-lists
++ https://developers.themoviedb.org/3/authentication/how-do-i-generate-a-session-id
++ https://developers.themoviedb.org/3/lists/v4-or-v3-lists
 
 
 + /src/api/tmdb-api.js
@@ -386,7 +387,7 @@ This information was referenced here:
 This outlines the source files which are involved in pagination on the Home Page, the Upcoming movies page and the search page.
 
 The information was references here:
-    + https://material-ui.com/components/pagination/
++ https://material-ui.com/components/pagination/
     
 
 + /src/components/paginationCard/index.js
