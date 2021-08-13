@@ -355,6 +355,7 @@ This information was referenced here:
 + https://developers.themoviedb.org/3/authentication/how-do-i-generate-a-session-id
 + https://developers.themoviedb.org/3/lists/v4-or-v3-lists
 
+The relevent source code is here:
 
 + /src/api/tmdb-api.js
 
@@ -382,14 +383,14 @@ This information was referenced here:
             + createNewList: Create new list for both favorites and mustWatch and get ids.
 
 
-#### Pagination in Material UI and React##
+#### Pagination in Material UI and React
 
 This outlines the source files which are involved in pagination on the Home Page, the Upcoming movies page and the search page.
 
 The information was references here:
 + https://material-ui.com/components/pagination/
     
-
+The relevent source code is here:
 + /src/components/paginationCard/index.js
 
 
