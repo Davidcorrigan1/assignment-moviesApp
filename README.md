@@ -526,9 +526,9 @@ Additional API TMDB Endpoints Used with sample results:
 
 ### Component catalogue.
 
-....... Insert a screenshot from the Storybook UI showing your component catalogue. [For the Movies app, hi-light stories relating to new/modified components - see the example screenshot below] .......
+> This outlines the new Storybook stories which have been added.
 
-![][stories]
+![][Stories]
 
 ### UI Design. 
 
@@ -663,7 +663,7 @@ The relevent source code is here:
 + /src/components/paginationCard/index.js
 
 
-[stories]: ./images/storybook.PNG
+[Stories]: ./images/storybook.PNG
 [HomePageBK]: ./images/HomePageBK.PNG
 [MovieDetailPage]: ./images/MovieDetailPage.PNG
 [MustWatchPage]: ./images/MustWatchPage.PNG
