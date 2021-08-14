@@ -549,19 +549,19 @@ This section will show new or updated application pages with a caption of the ne
 
 #### Appeared In Page.
 
->This is a new page which will display the movies for a specific actor appeared in. This is based on which cast member the 'Movies' button was pressed in the movies detail page.
+>This is a new page which will display the movies which a specific actor appeared in. This is based on which cast member the 'Movies' button was pressed for on the movies detail page.
 
 ![][AppearedInPage]
 
 #### Search Page.
 
->The search page is a new page which allows the user to make specific movie searches via the API based on 3 different dropdown lists. These are genre, release year and certification.
+>The search page is a new page which allows the user to make specific movie searches via the API based on 3 different dropdown lists. These are genre, release year and/or certification.
 
 ![][SearchPage]
 
 #### Must Watch Page.
 
->This is a new page which displays the movies the user has add in the upcoming movies page to their watch list. 
+>This is a new page which displays the movies the user has added in the upcoming movies page to their watch list. 
 
 ![][MustWatchPage]
 
@@ -639,7 +639,7 @@ The relevent source code is here:
 
 + /src/contexts/authContexts.js
 
-    + Method Defined
+    + How method above are called:
         + authenticate() calls the following:
             + requestUserToken: Request a User Token from TMDB using API key
             + authenticateWithLogin: Authenticate with user and password for TMDB
